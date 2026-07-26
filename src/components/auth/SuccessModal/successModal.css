@@ -1,0 +1,246 @@
+.success-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(5,8,22,.82);
+    backdrop-filter:blur(10px);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    z-index:9999;
+    animation:overlayFade .35s ease;
+}
+
+.success-modal{
+    width:100%;
+    width:min(560px,92vw);
+    max-height:none;
+overflow:visible;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(46,168,255,.25);
+    border-radius:24px;
+    backdrop-filter:blur(18px);
+    padding:24px 28px;
+    color:#fff;
+    text-align:center;
+    box-shadow:
+        0 0 40px rgba(46,168,255,.18),
+        0 20px 60px rgba(0,0,0,.45);
+    animation:modalScale .45s ease;
+}
+
+.success-logo h2{
+    font-size:30px;
+    font-weight:700;
+    letter-spacing:1px;
+    margin:0;
+}
+
+.success-logo p{
+    margin-top:8px;
+    color:#8ebfff;
+    font-size:14px;
+}
+
+.success-check{
+    width:80px;
+    height:80px;
+    margin:28px auto;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#22c55e;
+    color:#fff;
+    font-size:42px;
+    font-weight:bold;
+    box-shadow:0 0 30px rgba(34,197,94,.45);
+}
+
+.success-title{
+    font-size:24px;
+    margin-bottom:10px;
+}
+
+.success-subtitle{
+    color:#b7c5d9;
+    line-height:1.7;
+}
+
+.success-divider{
+    height:1px;
+    background:rgba(255,255,255,.08);
+    margin:28px 0;
+}
+
+.success-info{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.success-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 16px;
+    background:rgba(255,255,255,.04);
+    border-radius:14px;
+}
+
+.success-row span{
+    color:#8ea7c8;
+    font-size:14px;
+}
+
+.success-row strong{
+    color:#fff;
+}
+
+.success-btn{
+    width:100%;
+    margin-top:35px;
+    border:none;
+    border-radius:16px;
+    padding:16px;
+    background:linear-gradient(90deg,#1b84ff,#3bb8ff);
+    color:#fff;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.success-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 0 30px rgba(46,168,255,.45);
+}
+
+@keyframes overlayFade{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+    }
+}
+
+@keyframes modalScale{
+    from{
+        opacity:0;
+        transform:scale(.92);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+@media(max-width:768px){
+
+.success-modal{
+    padding:30px 22px;
+}
+
+.success-logo h2{
+    font-size:26px;
+}
+
+.success-title{
+    font-size:21px;
+}
+
+.success-check{
+    width:70px;
+    height:70px;
+    font-size:36px;
+}
+
+.success-row{
+    flex-direction:column;
+    gap:6px;
+}
+
+}
+/* =========================
+   Verified Badge
+========================= */
+
+.verified-badge{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:10px 22px;
+    margin:8px auto 22px;
+    border-radius:999px;
+    background:rgba(46,204,113,.12);
+    border:1px solid rgba(46,204,113,.35);
+    color:#2ecc71;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    box-shadow:0 0 18px rgba(46,204,113,.20);
+}
+
+/* =========================
+   Brand Highlight
+========================= */
+
+.success-title span{
+    display:inline-block;
+    margin-top:8px;
+    color:#4da3ff;
+    font-size:32px;
+    font-weight:800;
+    letter-spacing:1px;
+}
+/* =========================
+   Premium Info Cards
+========================= */
+
+/* ===========================
+   Compact Information Rows
+=========================== */
+
+.info-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:12px 0;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.info-row:last-child{
+    border-bottom:none;
+}
+
+.info-row span{
+    color:#9ca3af;
+    font-size:14px;
+    font-weight:500;
+}
+
+.info-row strong{
+    color:#fff;
+    font-size:15px;
+    font-weight:700;
+}
+
+.active-status{
+    color:#2ecc71 !important;
+}
+
+.active-status{
+    display:inline-block;
+    color:#2ecc71;
+    font-weight:800;
+}
+.security-note{
+    text-align:center;
+    font-size:13px;
+    color:#8b93a7;
+    margin:18px 0 14px;
+}

@@ -1,0 +1,160 @@
+.how-it-works{
+
+    padding:120px 0;
+
+    background:var(--bg);
+
+}
+
+.how-header{
+
+    max-width:700px;
+
+    margin:auto;
+
+    text-align:center;
+
+}
+
+.how-header span{
+
+    color:var(--primary);
+
+    font-size:14px;
+
+    font-weight:600;
+
+    letter-spacing:2px;
+
+}
+
+.how-header h2{
+
+    margin-top:16px;
+
+    font-size:48px;
+
+    color:var(--text);
+
+    line-height:1.2;
+
+}
+
+.how-header p{
+
+    margin-top:20px;
+
+    color:var(--text-light);
+
+    font-size:18px;
+
+    line-height:1.8;
+
+}
+.steps-wrapper{
+
+    margin-top:80px;
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:30px;
+    position:relative;
+
+align-items:start;
+
+padding-top:40px;
+}
+.step-icon{
+
+    width:100px;
+
+    height:100px;
+
+    margin:0 auto;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:50%;
+
+    background:radial-gradient(
+        circle at top,
+        rgba(59,130,246,.20),
+        rgba(37,99,235,.08)
+    );
+
+    border:2px solid rgba(59,130,246,.25);
+
+    color:#ffffff;
+
+    font-size:38px;
+
+    box-shadow:
+    0 0 0 6px rgba(37,99,235,.04),
+    0 10px 25px rgba(37,99,235,.12);
+
+    transition:.35s ease;
+
+}
+
+.step-card:hover .step-icon{
+
+    transform:translateY(-8px) scale(1.05);
+
+    border-color:#3b82f6;
+
+    background:radial-gradient(
+        circle at top,
+        rgba(59,130,246,.28),
+        rgba(37,99,235,.10)
+    );
+
+    box-shadow:
+        0 0 18px rgba(59,130,246,.35),
+        0 18px 35px rgba(37,99,235,.22);
+
+}
+
+.step-card{
+
+    position:relative;
+
+    
+    z-index:2;
+    text-align:center;
+}
+
+.step-card h3{
+
+    margin-top:22px;
+
+    font-size:28px;
+
+    color:var(--text);
+
+    font-weight:700;
+
+}
+
+.step-card p{
+
+    margin-top:14px;
+
+    color:var(--text-light);
+
+    line-height:1.7;
+
+    font-size:16px;
+
+    max-width:220px;
+
+    margin-left:auto;
+
+    margin-right:auto;
+
+}

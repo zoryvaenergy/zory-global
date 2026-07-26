@@ -1,0 +1,791 @@
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width:992px){
+
+    .container{
+
+        width:94%;
+
+    }
+.header{
+
+    padding:0 30px;
+
+}
+
+.logo{
+
+    font-size:26px;
+
+}
+
+.nav-links{
+
+    gap:22px;
+
+}
+
+.nav-link{
+
+    font-size:15px;
+
+}
+
+.register-btn{
+
+    padding:10px 18px;
+
+}
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width:768px){
+.hero{
+
+    flex-direction:column;
+
+    align-items:center;
+
+    text-align:center;
+
+    gap:40px;
+
+    padding:100px 20px 60px;
+
+}
+
+.hero-left{
+
+    flex:100%;
+
+    max-width:100%;
+
+    text-align:center;
+
+}
+
+.hero-right{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+}
+.hero-title{
+
+    font-size:48px;
+
+}
+
+.hero-heading{
+
+    font-size:28px;
+
+}
+
+.hero-description{
+
+    font-size:16px;
+
+    line-height:1.7;
+     max-width:100%;
+}
+.hero{
+
+    padding:80px 16px 50px;
+
+}
+
+.hero-buttons{
+
+    flex-direction:column;
+
+    width:100%;
+
+    gap:12px;
+
+}
+
+.hero-buttons .primary-btn,
+.hero-buttons .secondary-btn{
+
+    width:100%;
+
+}
+
+.hero-features{
+
+    justify-content:center;
+
+}
+.platform-preview{
+
+    width:100%;
+
+    max-width:100%;
+
+    padding:24px 18px;
+
+}
+
+.platform-grid{
+
+    grid-template-columns:1fr;
+
+    gap:14px;
+
+}
+.platform-card{
+
+    padding:18px;
+
+}
+
+.platform-icon{
+
+    font-size:28px;
+
+    margin-bottom:12px;
+
+}
+
+.platform-card h4{
+
+    font-size:17px;
+
+}
+
+.platform-card p{
+
+    font-size:13px;
+
+    line-height:1.4;
+
+}
+.platform-top p{
+
+    font-size:14px;
+
+}
+.platform-card{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    min-height:120px;
+
+}
+.platform-top h3{
+
+    font-size:28px;
+
+}
+/* ==========================
+   STATS
+========================== */
+
+.stats-section{
+
+    padding:20px 16px 60px;
+
+    gap:18px;
+
+}
+.stats-card{
+
+    padding:28px 20px;
+
+}
+.stats-icon{
+
+    font-size:36px;
+
+    margin-bottom:14px;
+
+}
+.stats-card h2{
+
+    font-size:30px;
+
+}
+.stats-card p{
+
+    font-size:15px;
+
+}
+ /* ==========================
+   WHY CHOOSE
+========================== */
+
+.why-choose{
+
+    padding:70px 0;
+
+}
+
+.why-header{
+
+    max-width:100%;
+
+    padding:0 16px;
+
+}
+
+.why-header span{
+
+    font-size:13px;
+
+    letter-spacing:1.5px;
+
+}
+
+.why-header h2{
+
+    font-size:34px;
+
+    line-height:1.25;
+
+}
+
+.why-header p{
+
+    font-size:15px;
+
+    line-height:1.7;
+
+    max-width:320px;
+
+    margin:18px auto 0;
+
+}
+
+.why-grid{
+
+    margin-top:40px;
+
+    grid-template-columns:1fr;
+
+    gap:20px;
+
+    padding:0 16px;
+
+}
+
+.why-card{
+
+    padding:30px 22px;
+
+    border-radius:20px;
+    min-height:190px;
+}
+
+.why-icon{
+
+    width:60px;
+
+    height:60px;
+
+    font-size:30px;
+
+    margin-bottom:18px;
+
+}
+
+.why-card h3{
+
+    font-size:20px;
+
+    margin-bottom:12px;
+
+}
+
+.why-card p{
+
+    font-size:15px;
+
+    line-height:1.6;
+
+}
+/* ==========================
+   HOW IT WORKS
+========================== */
+
+.how-it-works{
+
+    padding:70px 0;
+
+}
+
+.how-header{
+
+    max-width:100%;
+
+    padding:0 16px;
+
+}
+
+.how-header span{
+
+    font-size:13px;
+
+    letter-spacing:1.5px;
+
+}
+
+.how-header h2{
+
+    font-size:36px;
+
+    line-height:1.25;
+
+}
+
+.how-header p{
+
+    font-size:15px;
+
+    line-height:1.7;
+
+    max-width:320px;
+
+    margin:18px auto 0;
+
+}
+
+.steps-wrapper{
+
+    margin-top:40px;
+
+    grid-template-columns:1fr;
+
+    gap:28px;
+
+    padding:0 16px;
+
+}
+
+.step-card{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:20px;
+
+    padding:30px 22px;
+
+    min-height:180px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.20);
+
+}
+
+.step-icon{
+
+    width:64px;
+
+    height:64px;
+
+    font-size:26px;
+
+}
+
+.step-card h3{
+
+    margin-top:18px;
+
+    font-size:22px;
+
+}
+
+.step-card p{
+
+    margin-top:12px;
+
+    font-size:15px;
+
+    line-height:1.6;
+
+    max-width:100%;
+
+}
+/* ==========================
+   ROADMAP
+========================== */
+
+.roadmap{
+
+    padding:70px 0;
+
+}
+
+.roadmap-header{
+
+    margin-bottom:40px;
+
+    padding:0 16px;
+
+}
+
+.roadmap-header span{
+
+    font-size:13px;
+
+    letter-spacing:2px;
+
+}
+
+.roadmap-header h2{
+
+    margin-top:16px;
+
+    font-size:36px;
+
+    line-height:1.2;
+
+}
+
+.roadmap-header p{
+
+    margin-top:18px;
+
+    font-size:15px;
+
+    line-height:1.7;
+
+    max-width:320px;
+
+}
+
+.roadmap-grid{
+
+    grid-template-columns:1fr;
+
+    gap:20px;
+
+    padding:0 16px;
+
+}
+
+.roadmap-card{
+
+    min-height:190px;
+
+    padding:28px 22px;
+
+    border-radius:20px;
+
+}
+
+.roadmap-year{
+
+    padding:7px 16px;
+
+    font-size:14px;
+
+    margin-bottom:18px;
+
+}
+
+.roadmap-card h3{
+
+    font-size:22px;
+
+    margin:8px 0 18px;
+
+}
+
+.roadmap-card li{
+
+    font-size:15px;
+
+    margin-bottom:10px;
+
+    line-height:1.6;
+
+}
+.roadmap-year{
+
+    font-size:13px;
+
+    font-weight:700;
+
+    padding:6px 14px;
+
+}
+/* ==========================
+   TOKENOMICS
+========================== */
+
+.tokenomics{
+
+    padding:70px 0;
+
+}
+
+.tokenomics-header{
+
+    margin-bottom:40px;
+
+    padding:0 16px;
+
+}
+
+.tokenomics-header span{
+
+    font-size:13px;
+
+    letter-spacing:2px;
+
+}
+
+.tokenomics-header h2{
+
+    margin-top:16px;
+
+    font-size:36px;
+
+    line-height:1.2;
+
+}
+
+.tokenomics-header p{
+
+    margin-top:18px;
+
+    font-size:15px;
+
+    line-height:1.7;
+
+    max-width:320px;
+
+}
+
+.tokenomics-list{
+
+    max-width:100%;
+
+    padding:0 16px;
+
+    gap:18px;
+
+}
+
+.token-card{
+
+    padding:22px 18px;
+
+    border-radius:18px;
+
+}
+
+.token-top{
+
+    margin-bottom:14px;
+
+}
+
+.token-top h3{
+
+    font-size:17px;
+
+    line-height:1.5;
+
+}
+
+.token-top span{
+
+    font-size:24px;
+
+}
+
+.progress{
+
+    height:10px;
+
+}
+/* ==========================
+   ABOUT
+========================== */
+
+.about{
+
+    padding:70px 0;
+
+}
+
+.about-grid{
+
+    grid-template-columns:1fr;
+
+    gap:40px;
+
+    padding:0 16px;
+
+}
+
+.about-left{
+
+    text-align:center;
+
+}
+
+.about-left span{
+
+    font-size:13px;
+
+    letter-spacing:2px;
+
+}
+
+.about-left h2{
+
+    margin:16px 0 20px;
+
+    font-size:34px;
+
+    line-height:1.2;
+
+}
+
+.about-left p{
+
+    font-size:15px;
+
+    line-height:1.8;
+
+    margin-bottom:18px;
+
+}
+
+.about-right{
+
+    gap:16px;
+
+}
+
+.about-card{
+
+    padding:18px 20px;
+
+    border-radius:18px;
+
+}
+
+.check{
+
+    width:38px;
+
+    height:38px;
+
+    font-size:18px;
+
+}
+
+.about-card span:last-child{
+
+    font-size:17px;
+
+}
+/* ==========================
+   FOOTER
+========================== */
+
+.footer{
+
+    margin-top:70px;
+
+    padding:60px 0 25px;
+
+}
+
+.footer-grid{
+
+    grid-template-columns:1fr;
+
+    gap:28px;
+
+    margin-bottom:40px;
+
+    padding:0 16px;
+
+    text-align:center;
+
+}
+
+.footer-brand h2{
+
+    font-size:30px;
+
+    margin-bottom:16px;
+
+}
+
+.footer-brand p{
+
+    max-width:320px;
+
+    margin:0 auto;
+
+    font-size:15px;
+
+    line-height:1.7;
+
+}
+
+.footer h3{
+
+    font-size:20px;
+
+    margin-bottom:16px;
+
+}
+
+.footer li{
+
+    font-size:15px;
+
+    margin-bottom:10px;
+
+}
+
+.footer li:hover{
+
+    transform:none;
+
+    letter-spacing:0;
+
+}
+
+.footer-bottom{
+
+    padding-top:24px;
+
+    font-size:14px;
+
+}
+}
+
+
+/* ==========================================
+   SMALL MOBILE
+========================================== */
+
+@media (max-width:576px){
+
+}

@@ -1,0 +1,45 @@
+:root{
+
+  /* ===== Brand ===== */
+
+  --primary:#2563EB;
+  --primary-hover:#1D4ED8;
+
+  --secondary:#38BDF8;
+
+  /* ===== Background ===== */
+
+  --bg:#081120;
+  --bg-light:#0F1C36;
+  --card:#101C36;
+
+  /* ===== Text ===== */
+
+  --text:#FFFFFF;
+  --text-light:#AAB4C5;
+
+  /* ===== Border ===== */
+
+  --border:rgba(255,255,255,.08);
+
+  /* ===== Radius ===== */
+
+  --radius-sm:10px;
+  --radius-md:18px;
+  --radius-lg:28px;
+
+  /* ===== Shadow ===== */
+
+  --shadow:
+
+      0 25px 70px rgba(37,99,235,.18);
+
+  /* ===== Container ===== */
+
+  --container:1200px;
+
+  /* ===== Transition ===== */
+
+  --transition:.35s ease;
+
+}

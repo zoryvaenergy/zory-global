@@ -1,0 +1,157 @@
+.platform-preview{
+
+    width:100%;
+
+    max-width:560px;
+
+    background:linear-gradient(180deg,#121b35,#0d1428);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:28px;
+
+    padding:30px;
+
+    box-shadow:0 25px 70px rgba(37,99,235,.18);
+
+    animation:float 5s ease-in-out infinite;
+
+}
+
+.platform-top{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+}
+
+.preview-badge{
+
+    display:inline-block;
+
+    padding:8px 18px;
+
+    border-radius:50px;
+
+    background:rgba(37,99,235,.15);
+
+    color:#60a5fa;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    letter-spacing:1px;
+
+}
+
+.platform-top h3{
+
+    margin-top:20px;
+
+    color:white;
+
+    font-size:30px;
+
+}
+
+.platform-top p{
+
+    margin-top:8px;
+
+    color:#9ca3af;
+
+}
+
+.platform-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:18px;
+
+}
+
+.platform-card{
+
+    background:rgba(255,255,255,.04);
+
+    border:1px solid rgba(255,255,255,.06);
+
+    border-radius:18px;
+
+    padding:24px;
+
+    transition:.35s;
+
+}
+
+.platform-card:hover{
+
+    transform:translateY(-6px);
+
+    border-color:#2563eb;
+
+    box-shadow:0 15px 35px rgba(37,99,235,.25);
+
+}
+
+.platform-icon{
+
+    font-size:34px;
+
+    margin-bottom:16px;
+
+}
+
+.platform-card h4{
+
+    color:white;
+
+    margin-bottom:8px;
+
+    font-size:18px;
+
+}
+
+.platform-card p{
+
+    color:#9ca3af;
+
+    font-size:14px;
+
+    line-height:1.5;
+
+}
+
+.explore-platform-btn{
+
+    margin-top:28px;
+
+    width:100%;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.explore-platform-btn:hover{
+
+    background:#1d4ed8;
+
+}
