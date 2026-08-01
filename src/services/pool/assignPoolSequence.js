@@ -6,10 +6,10 @@ import {
 import { findPoolPosition } from "./findPoolPosition";
 import { database } from "../../firebase/firebaseConfig";
 
-export async function assignPoolSequence(userId) {
+export async function assignPoolSequence(userId, poolKey = "pool1") {
 
   // Pool 1 Sequence Counter
-  const sequenceRef = ref(database, "poolSystem/pool1/lastSequence");
+  const sequenceRef = ref(database, `poolSystem/${poolKey}/lastSequence`);
 
   // Atomic Sequence Generate
   const result = await runTransaction(sequenceRef, (currentValue) => {
@@ -23,21 +23,39 @@ export async function assignPoolSequence(userId) {
   const sequence = result.snapshot.val();
 
   // Pool Position
-  const poolPosition = await findPoolPosition(sequence);
+  const poolPosition = await findPoolPosition(sequence, poolKey);
 
- // Save User Pool Data
+ 
+// Save User Pool Data
 await update(ref(database, "users/" + userId), {
 
-  "pools/pool1/sequence": sequence,
+  [`pools/${poolKey}/sequence`]: sequence,
 
-  "pools/pool1/parentSequence": poolPosition.parentSequence,
+  [`pools/${poolKey}/parentSequence`]:
+    poolPosition.parentSequence,
 
-  "pools/pool1/currentStep": poolPosition.step,
+  [`pools/${poolKey}/currentStep`]:
+    poolPosition.step,
+ 
+    
+  
+  // New Fields
+  [`pools/${poolKey}/completed`]: false,
+
+  [`pools/${poolKey}/joinedAt`]:
+    Date.now(),
+
+  [`pools/${poolKey}/lockedAmount`]: 0,
+
+  [`pools/${poolKey}/isLocked`]: false,
+
+  [`pools/${poolKey}/isUnlocked`]: false,
+
+  [`pools/${poolKey}/unlockDate`]: null,
 
 });
-
 // Create Sequence Index
-await update(ref(database, "poolSystem/pool1"), {
+await update(ref(database, `poolSystem/${poolKey}`), {
 
   ["sequenceIndex/" + sequence]: userId,
 
@@ -49,5 +67,6 @@ await update(ref(database, "poolSystem/pool1"), {
   sequence,
   parentSequence: poolPosition.parentSequence,
   currentStep: poolPosition.step,
+  position: poolPosition.position,
 };
 }

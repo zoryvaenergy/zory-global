@@ -2,21 +2,42 @@ import { useEffect, useState } from "react";
 import { ref, get } from "firebase/database";
 import { database } from "../firebase/firebaseConfig";
 import { getLevelTeam } from "../services/team/getLevelTeam";
-
+import { getCurrentUser } from "../services/user/getCurrentUser";
+import MatrixList from "../components/partners/MatrixList";
+import MatrixDetails from "../components/partners/MatrixDetails";
+import DirectTeam from "../components/partners/DirectTeam";
+import LevelTeam from "../components/partners/LevelTeam";
+import "../styles/partners/partners.css";
+import PartnersTabs from "../components/partners/PartnersTabs";
+import { useNavigate } from "react-router-dom";
 function Team() {
+  const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState(null);
   const [directTeam, setDirectTeam] = useState([]);
   const [levelTeam, setLevelTeam] = useState([]);
-
+const [activeTab, setActiveTab] = useState("direct");
+  const [selectedMatrix, setSelectedMatrix] = useState(null);
+const [searchTerm, setSearchTerm] = useState("");
   // Current User Load
   useEffect(() => {
-    const savedUser = localStorage.getItem("currentUser");
+  async function loadCurrentUser() {
+    const savedUser = JSON.parse(
+      localStorage.getItem("currentUser")
+    );
 
-    if (savedUser) {
-      setCurrentUser(JSON.parse(savedUser));
+    if (!savedUser) return;
+
+    const latestUser = await getCurrentUser(
+      savedUser.profile.userId
+    );
+
+    if (latestUser) {
+      setCurrentUser(latestUser);
     }
-  }, []);
+  }
 
+  loadCurrentUser();
+}, []);
   // Team Load
   useEffect(() => {
     if (!currentUser) return;
@@ -25,6 +46,7 @@ function Team() {
     loadLevelTeam();
   }, [currentUser]);
 
+  // Level Team
   const loadLevelTeam = async () => {
     try {
       const data = await getLevelTeam(currentUser.profile.userId);
@@ -34,7 +56,7 @@ function Team() {
     }
   };
 
-  // Firebase Se Direct Team
+  // Direct Team
   const loadDirectTeam = async () => {
     try {
       const snapshot = await get(ref(database, "users"));
@@ -59,271 +81,95 @@ function Team() {
       console.error("Direct Team Error :", error);
     }
   };
-
-  // Copy Referral Link
-  const copyReferralLink = () => {
-    const referralLink = `https://zoryglobal.com/register?ref=${
-      currentUser?.profile?.userId || ""
-    }`;
-
-    navigator.clipboard.writeText(referralLink);
-
-    alert("Referral Link Copied Successfully");
-  };
-
+if (!currentUser) {
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        background: "#050b25",
-        color: "white",
-        padding: "30px",
-      }}
-    >
-      <h1>My Team</h1>
-
-      {/* Summary Cards */}
-
-      <div
-        style={{
-          display: "flex",
-          gap: "20px",
-          flexWrap: "wrap",
-          marginTop: "30px",
-        }}
-      >
-        <div style={cardStyle}>
-          <h3>Direct Team</h3>
-          <h2>{currentUser?.team?.directCount || 0}</h2>
-        </div>
-
-        <div style={cardStyle}>
-          <h3>Level Team</h3>
-
-          <h2>
-            {(currentUser?.team?.level1Count || 0) +
-              (currentUser?.team?.level2Count || 0) +
-              (currentUser?.team?.level3Count || 0) +
-              (currentUser?.team?.level4Count || 0) +
-              (currentUser?.team?.level5Count || 0) +
-              (currentUser?.team?.level6Count || 0) +
-              (currentUser?.team?.level7Count || 0) +
-              (currentUser?.team?.level8Count || 0) +
-              (currentUser?.team?.level9Count || 0) +
-              (currentUser?.team?.level10Count || 0)}
-          </h2>
-        </div>
-
-        <div style={cardStyle}>
-          <h3>Total Team</h3>
-          <h2>{currentUser?.team?.totalTeam || 0}</h2>
-        </div>
-      </div>
-
-      {/* Referral Link */}
-
-      <div
-        style={{
-          background: "#101935",
-          padding: "20px",
-          borderRadius: "15px",
-          marginTop: "30px",
-        }}
-      >
-        <h2>Your Referral Link</h2>
-
-        <div
-          style={{
-            display: "flex",
-            gap: "10px",
-            marginTop: "10px",
-          }}
-        >
-          <input
-            type="text"
-            value={`https://zoryglobal.com/register?ref=${
-              currentUser?.profile?.userId || ""
-            }`}
-            readOnly
-            style={{
-              flex: 1,
-              padding: "12px",
-              borderRadius: "10px",
-              border: "none",
-            }}
-          />
-
-          <button
-            onClick={copyReferralLink}
-            style={{
-              padding: "12px 20px",
-              borderRadius: "10px",
-              border: "none",
-              cursor: "pointer",
-              background: "#4f46e5",
-              color: "#fff",
-              fontWeight: "600",
-            }}
-          >
-            Copy
-          </button>
-        </div>
-      </div>
-            {/* Direct Team List */}
-
-      <div
-        style={{
-          background: "#101935",
-          padding: "20px",
-          borderRadius: "15px",
-          marginTop: "30px",
-        }}
-      >
-        <h2>Direct Team List</h2>
-
-        <table
-          style={{
-            width: "100%",
-            marginTop: "20px",
-            borderCollapse: "collapse",
-          }}
-        >
-          <thead>
-            <tr>
-              <th style={{ textAlign: "left", padding: "12px" }}>
-                User ID
-              </th>
-
-              <th style={{ textAlign: "left", padding: "12px" }}>
-                Name
-              </th>
-
-              <th style={{ textAlign: "left", padding: "12px" }}>
-                Sponsor ID
-              </th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {directTeam.length === 0 ? (
-              <tr>
-                <td
-                  colSpan="3"
-                  style={{
-                    textAlign: "center",
-                    padding: "20px",
-                  }}
-                >
-                  No Direct Team Found
-                </td>
-              </tr>
-            ) : (
-              directTeam.map((member) => (
-                <tr key={member.profile.userId}>
-                  <td style={{ padding: "12px" }}>
-                    {member.profile.userId}
-                  </td>
-
-                  <td style={{ padding: "12px" }}>
-                    {member.profile.fullName}
-                  </td>
-
-                  <td style={{ padding: "12px" }}>
-                    {member.profile.sponsorId}
-                  </td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Level Team List */}
-
-      <div
-        style={{
-          background: "#101935",
-          padding: "20px",
-          borderRadius: "15px",
-          marginTop: "30px",
-        }}
-      >
-        <h2>Level Team List</h2>
-
-        <table
-          style={{
-            width: "100%",
-            marginTop: "20px",
-            borderCollapse: "collapse",
-          }}
-        >
-          <thead>
-            <tr>
-              <th style={{ textAlign: "left", padding: "12px" }}>
-                User ID
-              </th>
-
-              <th style={{ textAlign: "left", padding: "12px" }}>
-                Name
-              </th>
-
-              <th style={{ textAlign: "left", padding: "12px" }}>
-                Sponsor ID
-              </th>
-
-              <th style={{ textAlign: "left", padding: "12px" }}>
-                Level
-              </th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {levelTeam.length === 0 ? (
-              <tr>
-                <td
-                  colSpan="4"
-                  style={{
-                    textAlign: "center",
-                    padding: "20px",
-                  }}
-                >
-                  No Level Team Found
-                </td>
-              </tr>
-            ) : (
-              levelTeam.map((member) => (
-                <tr key={member.userId}>
-                  <td style={{ padding: "12px" }}>
-                    {member.userId}
-                  </td>
-
-                  <td style={{ padding: "12px" }}>
-                    {member.fullName}
-                  </td>
-
-                  <td style={{ padding: "12px" }}>
-                    {member.sponsorId}
-                  </td>
-
-                  <td style={{ padding: "12px" }}>
-                    Level {member.level}
-                  </td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-      </div>
+    <div className="partners-page">
+      <h2>Loading...</h2>
     </div>
   );
 }
+const directPartners = directTeam.length;
 
-const cardStyle = {
-  background: "#101935",
-  padding: "20px",
-  borderRadius: "15px",
-  minWidth: "200px",
-  textAlign: "center",
-};
+const levelPartners = levelTeam.length;
+
+const totalPartners = currentUser?.team?.totalTeam || 0;
+  console.log("Current User Team:", currentUser?.team);
+  return (
+    
+    <div className="partners-page">
+      <button
+  className="partners-back-btn"
+  onClick={() => navigate("/dashboard")}
+>
+  ← Dashboard
+</button>
+      <h1 className="partners-title">My Partners</h1>
+
+      {!selectedMatrix ? (
+        <>
+          <div className="partner-summary">
+            <div className="partner-card">
+              <h3>Direct Partners</h3>
+              <h2>{directPartners}</h2>
+            </div>
+
+            <div className="partner-card">
+              <h3>Level Partners</h3>
+              <h2>{levelPartners}</h2>
+            </div>
+
+            <div className="partner-card">
+              <h3>Total Partners</h3>
+              <h2>{totalPartners}</h2>
+            </div>
+          </div>
+
+          <>
+ <PartnersTabs
+  activeTab={activeTab}
+  setActiveTab={setActiveTab}
+/>
+
+{activeTab !== "matrix" && (
+  <div className="partners-search">
+    <input
+      type="text"
+      placeholder="Search by User ID, Name or Mobile..."
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+      className="partners-search-input"
+    />
+  </div>
+)}
+ {activeTab === "direct" && (
+  <DirectTeam
+  directTeam={directTeam}
+  searchTerm={searchTerm}
+/>
+)}
+
+{activeTab === "level" && (
+  <LevelTeam
+    levelTeam={levelTeam}
+    searchTerm={searchTerm}
+  />
+)}
+
+  {activeTab === "matrix" && (
+    <MatrixList
+      onSelectMatrix={setSelectedMatrix}
+    />
+  )}
+</>
+        </>
+      ) : (
+        <MatrixDetails
+          onBack={() => setSelectedMatrix(null)}
+          userPool={currentUser?.pools?.pool1}
+        />
+      )}
+    </div>
+  );
+}
 
 export default Team;

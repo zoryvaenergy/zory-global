@@ -1,7 +1,25 @@
 import "./hero.css";
 import PlatformPreview from "../PlatformPreview/PlatformPreview";
-
+import { useNavigate } from "react-router-dom";
+import { joinNow } from "../../services/web3/auth/joinNow";
 function Hero() {
+  const navigate = useNavigate();
+  async function handleJoinNow() {
+
+  const result = await joinNow();
+
+  console.log("Join Result :", JSON.stringify(result, null, 2));
+
+  if (result.action === "REGISTER") {
+    navigate("/register");
+    return;
+  }
+
+  if (result.action === "LOGIN") {
+    navigate("/dashboard");
+  }
+
+}
   return (
     <section className="hero">
 <div className="hero-bg">
@@ -29,9 +47,12 @@ secure digital infrastructure and community-driven growth.
         </p>
 
         <div className="hero-buttons">
-          <button className="primary-btn">
-            Join Now
-          </button>
+          <button
+  className="primary-btn"
+  onClick={handleJoinNow}
+>
+  Join Now
+</button>
 
           <button className="secondary-btn">
             Learn More

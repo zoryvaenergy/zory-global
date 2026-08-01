@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import "../styles/profile/profile.css";
+import ProfileCard from "../components/profile/ProfileCard";
 
 function Profile() {
   const [userData, setUserData] = useState(null);
@@ -13,108 +15,151 @@ function Profile() {
 
   if (!userData) {
     return (
-      <div
-        style={{
-          minHeight: "100vh",
-          background: "#050b25",
-          color: "#fff",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          fontSize: "18px",
-        }}
-      >
+      <div className="profile-loading">
         Loading Profile...
       </div>
     );
   }
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        background: "#050b25",
-        padding: "30px",
-        color: "#fff",
+    <div className="profile-page">
+
+      <ProfileCard userData={userData} />
+
+      <div className="profile-info-card">
+
+        <h2 className="profile-section-title">
+          Personal Information
+        </h2>
+<div className="profile-wallet-card">
+
+  <h2 className="profile-section-title">
+    Wallet Address
+  </h2>
+
+  <div className="profile-divider"></div>
+
+  <div className="wallet-address-box">
+
+    <span className="wallet-address">
+      {userData?.wallet?.address || "Wallet Not Connected"}
+    </span>
+
+    <button
+      className="copy-wallet-btn"
+      onClick={() => {
+        if (!userData?.wallet?.address) return;
+
+        navigator.clipboard.writeText(
+          userData.wallet.address
+        );
+
+        alert("Wallet Address Copied");
       }}
     >
-      <h1
-        style={{
-          marginBottom: "30px",
-        }}
-      >
-        My Profile
-      </h1>
+      📋 Copy Address
+    </button>
 
-      <div
-        style={{
-          background: "#101935",
-          border: "1px solid #26365f",
-          borderRadius: "18px",
-          padding: "30px",
-          maxWidth: "750px",
-        }}
-      >
-        <h2>Personal Information</h2>
+  </div>
 
-        <hr
-          style={{
-            borderColor: "#26365f",
-            margin: "20px 0",
-          }}
-        />
+</div>
+        <div className="profile-divider"></div>
 
-        <p>
-          <strong>Full Name :</strong>{" "}
-          {userData.profile?.fullName}
-        </p>
+        <div className="profile-info-grid">
 
-        <p>
-          <strong>User ID :</strong>{" "}
-          {userData.profile?.userId}
-        </p>
+          <div className="profile-info-item">
+            <span>Full Name</span>
+            <strong>{userData.profile?.fullName}</strong>
+          </div>
 
-        <p>
-          <strong>Sponsor ID :</strong>{" "}
-          {userData.profile?.sponsorId || "ROOT USER"}
-        </p>
+          <div className="profile-info-item">
+            <span>User ID</span>
+            <strong>{userData.profile?.userId}</strong>
+          </div>
 
-        <p>
-          <strong>Mobile :</strong>{" "}
-          {userData.profile?.mobile}
-        </p>
+          <div className="profile-info-item">
+            <span>Sponsor ID</span>
+            <strong>
+              {userData.profile?.sponsorId || "ROOT USER"}
+            </strong>
+          </div>
 
-        <p>
-          <strong>Email :</strong>{" "}
-          {userData.auth?.email}
-        </p>
+          <div className="profile-info-item">
+            <span>Mobile</span>
+            <strong>{userData.profile?.mobile}</strong>
+          </div>
 
-        <br />
+          <div className="profile-info-item">
+            <span>Email:</span>
+            <strong>{userData.auth?.email}</strong>
+          </div>
 
-        <h2>Account Information</h2>
+        </div>
 
-        <hr
-          style={{
-            borderColor: "#26365f",
-            margin: "20px 0",
-          }}
-        />
+        <h2 className="profile-section-title">
+          Account Information
+        </h2> 
+        <div className="profile-divider"></div>
+<h2 className="profile-section-title">
+  Referral Statistics
+</h2>
 
-        <p>
-          <strong>Join Date :</strong>{" "}
-          {userData.profile?.joinDate}
-        </p>
+<div className="profile-divider"></div>
 
-        <p>
-          <strong>Join Time :</strong>{" "}
-          {userData.profile?.joinTime}
-        </p>
+<div className="profile-info-grid">
 
-        <p>
-          <strong>Status :</strong>{" "}
-          {userData.auth?.status}
-        </p>
+  <div className="profile-info-item">
+    <span>👥 Direct Partner</span>
+    <strong>
+      {userData?.team?.directCount || 0}
+    </strong>
+  </div>
+
+  <div className="profile-info-item">
+    <span>🌐 Total Team</span>
+    <strong>
+      {userData?.team?.totalTeam || 0}
+    </strong>
+  </div>
+
+  <div className="profile-info-item">
+    <span>💰 Lifetime Income</span>
+    <strong>
+      £{Number(userData?.wallet?.totalIncome || 0).toFixed(2)}
+    </strong>
+  </div>
+
+  <div className="profile-info-item">
+    <span>🪙 Token Balance</span>
+    <strong>
+      {userData?.token?.balance || 0}
+    </strong>
+  </div>
+
+</div>
+        <div className="profile-divider"></div>
+
+        <div className="profile-info-grid">
+
+          <div className="profile-info-item">
+            <span>Join Date</span>
+            <strong>{userData.profile?.joinDate}</strong>
+          </div>
+
+          <div className="profile-info-item">
+            <span>Join Time</span>
+            <strong>{userData.profile?.joinTime}</strong>
+          </div>
+
+          <div className="profile-info-item">
+            <span>Status</span>
+            <strong>{userData.auth?.status}</strong>
+          </div>
+
+        </div>
+
       </div>
+
     </div>
   );
 }

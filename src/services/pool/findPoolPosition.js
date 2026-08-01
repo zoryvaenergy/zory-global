@@ -1,14 +1,14 @@
 import { ref, get } from "firebase/database";
 import { database } from "../../firebase/firebaseConfig";
 
-export async function findPoolPosition(sequence) {
+export async function findPoolPosition(sequence, poolKey = "pool1") {
 
-  const poolRef = ref(database, "poolSystem/pool1");
+  const poolRef = ref(database, `poolSystem/${poolKey}`);
 
   const snapshot = await get(poolRef);
 
   if (!snapshot.exists()) {
-    throw new Error("Pool 1 not found");
+    throw new Error(`Pool data not found: ${poolKey}`);
   }
 
   const poolData = snapshot.val();

@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { getCurrentAccount } from "../services/web3/walletService";
+import { useState, useEffect } from "react";
+import { sendPayment } from "../services/web3/payment/sendPayment";
 import { registerUser } from "../services/registration/registerUser";
 import SuccessModal from "../components/auth/SuccessModal/SuccessModal";
 import { useNavigate } from "react-router-dom";
+import { savePayment } from "../services/web3/payment/savePayment";
+import { verifyPayment } from "../services/web3/payment/verifyPayment";
 function Register() {
   const navigate = useNavigate();
   const [showSuccess, setShowSuccess] = useState(false);
@@ -17,16 +21,62 @@ function Register() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [sponsorId, setSponsorId] = useState("");
+const [loading, setLoading] = useState(false);
+const [walletAddress, setWalletAddress] = useState("");
+useEffect(() => {
 
+  async function loadWallet() {
+
+    const wallet = await getCurrentAccount();
+
+    if (wallet) {
+      setWalletAddress(wallet);
+    }
+
+  }
+
+  loadWallet();
+
+}, []);
   const handleRegister = async () => {
+    console.log("Wallet :", walletAddress);
+    
+    if (loading) return;
+
+setLoading(true);
     try {
-      const newUser = await registerUser({
+      const paymentResult = await sendPayment();
+
+console.log("Payment Result:", paymentResult);
+
+const verification = await verifyPayment(paymentResult);
+
+console.log("Verification Result:", verification);
+
+if (!verification.success) {
+  throw new Error(verification.message);
+}
+
+console.log("Verification Result:", verification);
+console.log("Sending Data", {
+  walletAddress,
+  provider: "OKX Wallet",
+  network: "BNB Chain",
+  chainId: 56,
+});
+const newUser = await registerUser({
   fullName,
   mobile,
   email,
   password,
   confirmPassword,
   sponsorId,
+
+  walletAddress,
+
+  provider: "OKX Wallet",
+  network: "BNB Chain",
+  chainId: 56,
 });
 
 setSuccessData({
@@ -45,8 +95,10 @@ setShowSuccess(true);
       setConfirmPassword("");
       setSponsorId("");
     } catch (error) {
-      alert(error.message);
-    }
+  alert(error.message);
+} finally {
+  setLoading(false);
+}
   };
 
   return (
@@ -129,21 +181,23 @@ setShowSuccess(true);
 />
 
         <button
-          onClick={handleRegister}
-          style={{
-            width: "100%",
-            padding: "15px",
-            border: "none",
-            borderRadius: "10px",
-            background: "#4f46e5",
-            color: "#fff",
-            cursor: "pointer",
-            fontSize: "16px",
-            fontWeight: "bold",
-          }}
-        >
-          Create Account
-        </button>
+  onClick={handleRegister}
+  disabled={loading}
+  style={{
+    width: "100%",
+    padding: "15px",
+    border: "none",
+    borderRadius: "10px",
+    background: loading ? "#9ca3af" : "#4f46e5",
+    color: "#fff",
+    cursor: loading ? "not-allowed" : "pointer",
+    fontSize: "16px",
+    fontWeight: "bold",
+    opacity: loading ? 0.7 : 1,
+  }}
+>
+  {loading ? "Creating Account..." : "Create Account"}
+</button>
       </div>
      <SuccessModal
   open={showSuccess}

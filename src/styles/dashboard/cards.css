@@ -39,3 +39,207 @@
     font-size:18px;
 
 }
+.summary-card h2{
+    margin:12px 0 6px;
+    font-size:34px;
+    font-weight:700;
+    color:#ffffff;
+}
+
+.summary-card small{
+    display:block;
+    margin-top:6px;
+    color:#94a3b8;
+    font-size:13px;
+    line-height:1.4;
+    font-weight:500;
+}
+.summary-icon{
+    font-size: 30px;
+    color: #facc15;
+}
+/* ==============================
+   Income Breakdown
+============================== */
+
+.income-breakdown{
+
+    margin-top:30px;
+
+    background:#101935;
+
+    border:1px solid #2D3B6B;
+
+    border-radius:18px;
+
+    padding:24px;
+
+}
+
+.income-breakdown h3{
+
+    color:#ffffff;
+
+    font-size:22px;
+
+    margin-bottom:20px;
+
+}
+
+.income-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:16px;
+
+}
+
+.income-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:14px 18px;
+
+    background:#151f42;
+
+    border:1px solid #2D3B6B;
+
+    border-radius:12px;
+
+    transition:.3s;
+
+}
+
+.income-row:hover{
+
+    border-color:#4F46E5;
+
+    transform:translateX(6px);
+
+}
+
+.income-row span{
+
+    color:#dbe4ff;
+
+    font-size:16px;
+
+}
+
+.income-row strong{
+
+    color:#ffffff;
+
+    font-size:18px;
+
+}
+/* ==========================
+   Recent Income History
+========================== */
+
+
+
+.recent-income h3{
+    margin-bottom:24px;
+    font-size:28px;
+    font-weight:700;
+    color:#ffffff;
+    text-align:left;
+}
+
+.income-history{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+}
+
+.history-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 22px;
+    background:#18244d;
+    border:1px solid #2D3B6B;
+    border-radius:14px;
+    transition:.3s;
+}
+
+.history-row:hover{
+    border-color:#4F46E5;
+    transform:translateX(4px);
+}
+
+.history-row strong{
+    display:block;
+    color:#ffffff;
+    font-size:18px;
+    margin-bottom:6px;
+}
+
+.history-row p{
+    margin:0;
+    color:#9ca3af;
+    font-size:14px;
+}
+
+.history-row span{
+    font-size:24px;
+    font-weight:700;
+    color:#22c55e;
+}
+.recent-income{
+    margin-top:25px;
+    display:flex;
+    flex-direction:column;
+     align-items:stretch;
+}
+/* ==========================
+   Empty Income State
+========================== */
+
+.income-empty{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+
+    min-height:280px;
+width:100%;
+    max-width:700px;
+    margin:0 auto;
+    border:1px dashed #374151;
+    border-radius:18px;
+
+    background:rgba(255,255,255,.02);
+}
+
+.income-empty-icon{
+    font-size:60px;
+    margin-bottom:20px;
+}
+
+.income-empty h4{
+    font-size:28px;
+    color:#ffffff;
+    margin-bottom:12px;
+}
+
+.income-empty p{
+    max-width:420px;
+    color:#94a3b8;
+    line-height:1.7;
+    font-size:16px;
+}
+.recent-subtitle{
+    text-align:center;
+    color:#94a3b8;
+    margin:-10px 0 30px;
+    font-size:15px;
+}

@@ -1,21 +1,48 @@
-import Sidebar from "../components/dashboard/Sidebar";
-import Header from "../components/dashboard/Header";
+import RecentIncome from "../components/dashboard/RecentIncome";
+import IncomeBreakdown from "../components/dashboard/IncomeBreakdown";
+import TopNavbar from "../components/dashboard/TopNavbar";
+import DashboardHeader from "../components/dashboard/DashboardHeader";
+import SummaryCards from "../components/dashboard/SummaryCards";
+import QuickActions from "../components/dashboard/QuickActions";
 import "../styles/dashboard/dashboard.css";
+import StatusCard from "../components/dashboard/StatusCard";
 import { signOut } from "firebase/auth";
 import auth from "../firebase/auth";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import StatCard from "../components/dashboard/StatCard";
-import UserCard from "../components/dashboard/UserCard";
-
+import ReferralCard from "../components/dashboard/ReferralCard";
+import RightMenu from "../components/dashboard/RightMenu";
+import { getCurrentUser } from "../services/user/getCurrentUser";
 function Dashboard() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+
+useEffect(() => {
+  async function loadUser() {
+    const savedUser = JSON.parse(
+      localStorage.getItem("currentUser")
+    );
+
+    if (!savedUser) return;
+
+    const latestUser = await getCurrentUser(
+      savedUser.profile.userId
+    );
+console.log("Latest User :", latestUser);
+console.log("Wallet :", latestUser?.wallet);
+    if (latestUser) {
+      setCurrentUser(latestUser);
+    }
+  }
+
+  loadUser();
+}, []);
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
       await signOut(auth);
-
       alert("Logout successful");
-
       navigate("/login");
     } catch (error) {
       alert(error.message);
@@ -24,39 +51,60 @@ function Dashboard() {
 
   return (
     <div className="dashboard-layout">
-
-      <Sidebar />
-
-      {/* Main */}
+      
 
       <div className="dashboard-main">
+        
+     <TopNavbar
+  onMenuClick={() => setMenuOpen(true)}
+/>
 
-        <Header />
+        {/* Dashboard Header */}
+        <DashboardHeader user={currentUser} />
+
+        {/* Summary Cards */}
+        <SummaryCards user={currentUser} />
+
+<IncomeBreakdown user={currentUser} />
+
+<RecentIncome user={currentUser} />
+
+<StatusCard />
+
+<ReferralCard user={currentUser} />
+
+<QuickActions /> 
+
+        <RightMenu
+  open={menuOpen}
+  onClose={() => setMenuOpen(false)}
+/>
+        {/*
+        =====================================================
+        OLD DASHBOARD (TEMPORARILY DISABLED)
+        =====================================================
 
         <div className="dashboard-card-container">
 
           <UserCard />
-         <StatCard
-    title="Wallet Balance"
-    value="0 ZORY"
-/>
+
+          <WalletSummary />
 
           <StatCard
-    title="Referral Team"
-    value="0 Members"
-/>
+            title="Referral Team"
+            value="0 Members"
+          />
 
           <StatCard
-    title="Status"
-    value="Active"
-/>
-
-          
+            title="Status"
+            value="Active"
+          />
 
           <StatCard
-    title="Rewards"
-    value="0"
-/>
+            title="Rewards"
+            value="0"
+          />
+
           <div className="dashboard-card">
 
             <h3>Sponsor & Referral</h3>
@@ -84,38 +132,11 @@ function Dashboard() {
 
         </div>
 
+        =====================================================
+        */}
       </div>
-
     </div>
   );
 }
-
-
-
-
-
-const inputStyle = {
-  width: "100%",
-  padding: "10px",
-  marginTop: "10px",
-  borderRadius: "8px",
-  border: "none",
-};
-
-const buttonContainer = {
-  display: "flex",
-  gap: "10px",
-  marginTop: "10px",
-};
-
-const buttonStyle = {
-  flex: 1,
-  padding: "10px",
-  border: "none",
-  borderRadius: "8px",
-  background: "#4f46e5",
-  color: "white",
-  cursor: "pointer",
-};
 
 export default Dashboard;

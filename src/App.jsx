@@ -9,6 +9,8 @@ import Team from "./pages/Team";
 import DebugTools from "./pages/DebugTools";
 import AdminDashboard from "./pages/AdminDashboard";
 import TestTeamEngine from "./pages/TestTeamEngine";
+import Wallet from "./pages/Wallet";
+import Web3Test from "./pages/Web3Test";
 function App() {
   return (
     <Routes>
@@ -25,9 +27,13 @@ function App() {
   element={<ForgotPassword />}
 />
 <Route path="/team" element={<Team />} />
+<Route path="/wallet" element={<Wallet />} />
+
 <Route path="/debug-tools" element={<DebugTools />} />
 <Route path="/admin-dashboard" element={<AdminDashboard />} />
 <Route path="/test-team-engine" element={<TestTeamEngine />} />
+
+   <Route path="/web3-test" element={<Web3Test />} />
     </Routes>
   );
 }

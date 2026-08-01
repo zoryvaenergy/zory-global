@@ -4,6 +4,7 @@ import TopBar from "./TopBar";
 import Sidebar from "./Sidebar";
 import DashboardCards from "./DashboardCards";
 import SearchUser from "./SearchUser";
+import DummyUserGenerator from "./DummyUserGenerator";
 function AdminLayout() {
   return (
   <div className="admin-layout">
@@ -15,9 +16,12 @@ function AdminLayout() {
       <Sidebar />
 
       <main className="admin-content">
-        <DashboardCards />
-        <SearchUser />
-      </main>
+  <DashboardCards />
+
+  <SearchUser />
+
+  <DummyUserGenerator />
+</main>
 
     </div>
 

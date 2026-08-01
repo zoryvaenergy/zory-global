@@ -1,6 +1,6 @@
 import "../../styles/dashboard/header.css";
 
-function Header() {
+function Header({ user }) {
   return (
     <header className="dashboard-header">
 
@@ -19,9 +19,19 @@ function Header() {
 
           <div>
 
-            <h4>Welcome</h4>
+           <h4>
+  {user?.profile?.fullName || "Welcome"}
+</h4>
 
-            <p>ZORY Member</p>
+<p>
+  {user?.profile?.userId || "ZORY Member"}
+</p>
+
+<small>
+  {user?.wallet?.address
+    ? `${user.wallet.address.slice(0, 8)}...${user.wallet.address.slice(-6)}`
+    : "Wallet Not Connected"}
+</small>
 
           </div>
 

@@ -42,11 +42,9 @@ export async function getLevelTeam(userId) {
 
         if (member) {
           levelTeam.push({
-            userId: member.profile.userId,
-            fullName: member.profile.fullName,
-            sponsorId: member.profile.sponsorId,
-            level,
-          });
+  ...member,
+  level,
+});
         }
       }
     }

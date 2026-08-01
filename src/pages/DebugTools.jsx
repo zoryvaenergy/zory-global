@@ -1,10 +1,21 @@
 import { repairDirectCount } from "../services/team/repairDirectCount";
+import { sendPayment } from "../services/web3/payment/sendPayment";
 
 function DebugTools() {
 
   async function handleRepair() {
     await repairDirectCount();
     alert("Repair Completed");
+  }
+
+  async function handlePaymentTest() {
+    try {
+      await sendPayment();
+      alert("Payment Test Completed");
+    } catch (error) {
+      console.error(error);
+      alert(error.message);
+    }
   }
 
   return (
@@ -15,6 +26,9 @@ function DebugTools() {
         Repair Direct Count
       </button>
 
+      <button onClick={handlePaymentTest}>
+        Test Payment Engine
+      </button>
     </div>
   );
 }
