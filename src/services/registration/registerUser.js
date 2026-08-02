@@ -17,7 +17,7 @@ export async function registerUser(data) {
   await validateSponsor(data.sponsorId);
 
   // Registration Lock
-  const lockAcquired = await acquireRegistrationLock(data.mobile);
+  const lockAcquired = await acquireRegistrationLock(data.walletAddress);
 
   if (!lockAcquired) {
     throw new Error(
@@ -36,13 +36,10 @@ export async function registerUser(data) {
 console.log("Provider :", data.provider);
 console.log("Network :", data.network);
 console.log("Chain ID :", data.chainId);
-   const userData = createUserModel({
+   
+const userData = createUserModel({
   firebaseUid: null,
   userId,
-  fullName: data.fullName,
-  mobile: data.mobile,
-  email: data.email,
-  password: data.password,
   sponsorId: data.sponsorId,
 
   walletAddress: data.walletAddress,
@@ -50,7 +47,6 @@ console.log("Chain ID :", data.chainId);
   network: data.network,
   chainId: data.chainId,
 });
-
     console.log(userData);
 
     // Step 4
@@ -63,19 +59,18 @@ console.log("Chain ID :", data.chainId);
     console.log("✅ Registration Completed");
 
     return {
-      success: true,
-      userId,
-      fullName: userData.profile.fullName,
-      sponsorId: userData.profile.sponsorId,
-      status: userData.auth.status,
-    };
+  success: true,
+  userId,
+  sponsorId: userData.profile.sponsorId,
+  status: userData.auth.status,
+};
   } finally {
 
-  console.log("🔓 Releasing Lock :", data.mobile);
+  console.log("🔓 Releasing Lock :", data.walletAddress);
 
-  await releaseRegistrationLock(data.mobile);
+await releaseRegistrationLock(data.walletAddress);
 
-  console.log("✅ Lock Released :", data.mobile);
+console.log("✅ Lock Released :", data.walletAddress);
 
 }
 }

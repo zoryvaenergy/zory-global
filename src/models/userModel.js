@@ -1,10 +1,6 @@
 export function createUserModel({
   firebaseUid,
   userId,
-  fullName,
-  mobile,
-  email,
-  password,
   sponsorId,
 
   walletAddress,
@@ -13,18 +9,15 @@ export function createUserModel({
   chainId,
 }) {
   return {
-    auth: {
-      firebaseUid,
-      email,
-      password,
-      status: "ACTIVE",
-      createdAt: Date.now(),
-    },
+        auth: {
+  firebaseUid,
+  status: "ACTIVE",
+  createdAt: Date.now(),
+},
 
     profile: {
       userId,
-      fullName,
-      mobile,
+      
       sponsorId,
 
       joinDate: new Date().toLocaleDateString("en-GB"),

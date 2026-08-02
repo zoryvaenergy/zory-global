@@ -6,20 +6,18 @@ import SuccessModal from "../components/auth/SuccessModal/SuccessModal";
 import { useNavigate } from "react-router-dom";
 import { savePayment } from "../services/web3/payment/savePayment";
 import { verifyPayment } from "../services/web3/payment/verifyPayment";
+import { connectWallet } from "../services/web3/connectWallet";
+import { checkWalletExists } from "../services/web3/registration/checkWalletExists";
 function Register() {
   const navigate = useNavigate();
   const [showSuccess, setShowSuccess] = useState(false);
   const [successData, setSuccessData] = useState({
-  memberName: "",
+  
   memberId: "",
   sponsorId: "",
   status: "",
 });
-  const [fullName, setFullName] = useState("");
-  const [mobile, setMobile] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+ 
   const [sponsorId, setSponsorId] = useState("");
 const [loading, setLoading] = useState(false);
 const [walletAddress, setWalletAddress] = useState("");
@@ -38,13 +36,40 @@ useEffect(() => {
   loadWallet();
 
 }, []);
+       const handleConnectWallet = async () => {
+
+  const result = await connectWallet();
+
+  if (!result.success) {
+    alert(result.message);
+    return;
+  }
+
+  setWalletAddress(result.walletAddress);
+
+};
   const handleRegister = async () => {
     console.log("Wallet :", walletAddress);
     
     if (loading) return;
 
 setLoading(true);
-    try {
+
+try {
+
+  const walletExists = await checkWalletExists(walletAddress);
+
+ if (walletExists) {
+
+  alert("This wallet is already registered.\nRedirecting to Login...");
+
+  setLoading(false);
+
+  navigate("/login");
+
+  return;
+
+}
       const paymentResult = await sendPayment();
 
 console.log("Payment Result:", paymentResult);
@@ -65,11 +90,6 @@ console.log("Sending Data", {
   chainId: 56,
 });
 const newUser = await registerUser({
-  fullName,
-  mobile,
-  email,
-  password,
-  confirmPassword,
   sponsorId,
 
   walletAddress,
@@ -78,9 +98,8 @@ const newUser = await registerUser({
   network: "BNB Chain",
   chainId: 56,
 });
-
 setSuccessData({
-  memberName: newUser.fullName,
+  
   memberId: newUser.userId,
   sponsorId: newUser.sponsorId,
   status: newUser.status,
@@ -88,11 +107,7 @@ setSuccessData({
 
 setShowSuccess(true);
 
-      setFullName("");
-      setMobile("");
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
+      
       setSponsorId("");
     } catch (error) {
   alert(error.message);
@@ -123,54 +138,37 @@ setShowSuccess(true);
         }}
       >
         <h1
-          style={{
-            textAlign: "center",
-            marginBottom: "30px",
-            color: "#fff",
-          }}
-        >
-          Register
-        </h1>
+  style={{
+    textAlign: "center",
+    marginBottom: "10px",
+    color: "#fff",
+    fontSize: "32px",
+    fontWeight: "700",
+  }}
+>
+  JOIN ZORY GLOBAL
+</h1>
 
-        <input
-          type="text"
-          placeholder="Full Name"
-          style={inputStyle}
-          value={fullName}
-          onChange={(e) => setFullName(e.target.value)}
-        />
+<p
+  style={{
+    textAlign: "center",
+    color: "#94a3b8",
+    marginBottom: "30px",
+    lineHeight: "24px",
+    fontSize: "15px",
+  }}
+>
+  Become a member of the decentralized ZORY GLOBAL community using your wallet.
+</p>
 
-        <input
-          type="text"
-          placeholder="Mobile Number"
-          style={inputStyle}
-          value={mobile}
-          onChange={(e) => setMobile(e.target.value)}
-        />
+        
 
-        <input
-          type="email"
-          placeholder="Email Address (Optional)"
-          style={inputStyle}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+       
 
-        <input
-          type="password"
-          placeholder="Password"
-          style={inputStyle}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        
+        
 
-        <input
-          type="password"
-          placeholder="Confirm Password"
-          style={inputStyle}
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
+        
 
         <input
   type="text"
@@ -179,7 +177,38 @@ setShowSuccess(true);
   value={sponsorId}
   onChange={(e) => setSponsorId(e.target.value)}
 />
-
+    <button
+  onClick={handleConnectWallet}
+  style={{
+    width: "100%",
+    padding: "15px",
+    marginBottom: "18px",
+    border: "none",
+    borderRadius: "10px",
+    background: walletAddress ? "#16a34a" : "#f59e0b",
+    color: "#fff",
+    cursor: "pointer",
+    fontSize: "16px",
+    fontWeight: "bold",
+  }}
+>
+  {walletAddress
+    ? "✅ Wallet Connected"
+    : "🔗 Connect OKX Wallet"}
+</button>
+{walletAddress && (
+  <div
+    style={{
+      marginBottom: "20px",
+      color: "#22c55e",
+      fontSize: "14px",
+      wordBreak: "break-all",
+      textAlign: "center",
+    }}
+  >
+    {walletAddress}
+  </div>
+)}
         <button
   onClick={handleRegister}
   disabled={loading}

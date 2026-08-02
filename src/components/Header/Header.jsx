@@ -1,78 +1,250 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+import { Link, useNavigate } from "react-router-dom";
+
+
+
+import { connectWallet } from "../../services/web3/connectWallet";
+
+import { checkWalletExists } from "../../services/web3/registration/checkWalletExists";
+
+
+
 import "./header.css";
+
+
 
 function Header() {
 
-    const [menuOpen, setMenuOpen] = useState(false);
 
-    return (
 
-        <header className="header">
+  const navigate = useNavigate();
 
-            <div className="logo">
 
-                ZORY <span>GLOBAL</span>
 
-            </div>
+  const [menuOpen, setMenuOpen] = useState(false);
 
-            <button
-                className="menu-toggle"
-                onClick={() => setMenuOpen(!menuOpen)}
-            >
+  
 
-                ☰
+  const [currentUser, setCurrentUser] = useState(null);
 
-            </button>
 
-            <nav className={`nav-links ${menuOpen ? "active" : ""}`}>
 
-                <Link
-                    to="/"
-                    className="nav-link"
-                    onClick={() => setMenuOpen(false)}
-                >
-                    Home
-                </Link>
+  useEffect(() => {
 
-                <a
-                    href="#roadmap"
-                    className="nav-link"
-                    onClick={() => setMenuOpen(false)}
-                >
-                    Roadmap
-                </a>
 
-                <a
-                    href="#tokenomics"
-                    className="nav-link"
-                    onClick={() => setMenuOpen(false)}
-                >
-                    Tokenomics
-                </a>
 
-                <Link
-                    to="/login"
-                    className="nav-link"
-                    onClick={() => setMenuOpen(false)}
-                >
-                    Login
-                </Link>
+    const user = localStorage.getItem("currentUser");
 
-                <Link
-                    to="/register"
-                    className="register-btn"
-                    onClick={() => setMenuOpen(false)}
-                >
-                    Register
-                </Link>
 
-            </nav>
 
-        </header>
+    if (user) {
 
-    );
+      setCurrentUser(JSON.parse(user));
+
+    }
+
+
+
+  }, []);
+
+
+
+  const handleConnectWallet = async () => {
+
+
+
+    try {
+
+
+
+      const result = await connectWallet();
+
+
+
+      if (!result.success) {
+
+        alert(result.message);
+
+        return;
+
+      }
+
+
+
+      const user = await checkWalletExists(result.walletAddress);
+
+
+
+      if (user) {
+
+
+
+        localStorage.setItem(
+
+          "currentUser",
+
+          JSON.stringify(user)
+
+        );
+
+
+
+        setCurrentUser(user);
+
+
+
+        navigate("/dashboard");
+
+
+
+        return;
+
+
+
+      }
+
+
+
+      navigate("/register");
+
+
+
+    } catch (error) {
+
+
+
+      alert(error.message);
+
+
+
+    }
+
+
+
+  };
+
+
+
+
+
+
+  return (
+
+
+
+    <header className="header">
+
+
+
+      <div className="logo">
+
+        ZORY <span>GLOBAL</span>
+
+      </div>
+
+
+
+      <button
+
+        className="menu-toggle"
+
+        onClick={() => setMenuOpen(!menuOpen)}
+
+      >
+
+        ☰
+
+      </button>
+
+
+
+      <nav className={`nav-links ${menuOpen ? "active" : ""}`}>
+
+
+
+        <Link
+
+          to="/"
+
+          className="nav-link"
+
+          onClick={() => setMenuOpen(false)}
+
+        >
+
+          Home
+
+        </Link>
+
+
+
+        <a
+
+          href="#roadmap"
+
+          className="nav-link"
+
+          onClick={() => setMenuOpen(false)}
+
+        >
+
+          Roadmap
+
+        </a>
+
+
+
+        <a
+
+          href="#tokenomics"
+
+          className="nav-link"
+
+          onClick={() => setMenuOpen(false)}
+
+        >
+
+          Tokenomics
+
+        </a>
+
+
+
+        <div style={{ position: "relative" }}>            
+
+        <button
+  className="register-btn"
+  onClick={handleConnectWallet}
+>
+  🔗 Connect Wallet
+</button>
+
+        
+
+
+        </div>
+
+
+
+      </nav>
+
+
+
+    </header>
+
+
+
+  );
+
+
 
 }
 
-export default Header;
+
+
+
+
+
+
+export default Header; 

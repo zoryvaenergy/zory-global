@@ -146,16 +146,18 @@ function RightMenu({ open, onClose }) {
         <div
           className="menu-item logout"
           onClick={async () => {
-            try {
-              await signOut(auth);
-            } catch (error) {
-              console.error("Logout Error:", error);
-            }
+  try {
+    await signOut(auth);
+  } catch (error) {
+    console.error("Logout Error:", error);
+  }
 
-            localStorage.removeItem("currentUser");
-            onClose();
-            navigate("/login");
-          }}
+  localStorage.removeItem("currentUser");
+
+  onClose();
+
+  navigate("/");
+}}
         >
           <FaSignOutAlt />
           <span>Logout</span>

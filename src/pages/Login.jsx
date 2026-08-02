@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
-import { ref, get } from "firebase/database";
 
-import auth from "../firebase/auth";
-import { database } from "../firebase/firebaseConfig";
+import { useNavigate } from "react-router-dom";
+
+import { loginWithWallet } from "../services/web3/login/loginWithWallet";
+
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -13,62 +12,44 @@ function Login() {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    try {
-      const snapshot = await get(ref(database, "users"));
 
-      if (!snapshot.exists()) {
-        alert("User not found");
-        return;
-      }
+  try {
 
-      const users = snapshot.val();
+    const result = await loginWithWallet();
 
-     let foundEmail = null;
-let currentUser = null;
+    if (!result.success) {
 
-for (const uid in users) {
+      alert(result.message);
 
-  const user = users[uid];
+      navigate("/register");
 
-  if (user.profile?.userId === email) {
+      return;
 
-    foundEmail = user.auth?.email;
-
-    currentUser = user;
-
-    break;
-  }
-}
-
-      if (!foundEmail) {
-        alert("Invalid User ID");
-        return;
-      }
-
-      await signInWithEmailAndPassword(
-        auth,
-        foundEmail,
-        password
-      );
-
-      alert("Login successful");
-     console.log("Current User :", currentUser);
-
-localStorage.setItem(
-  "currentUser",
-  JSON.stringify(currentUser)
-);
-
-console.log(
-  "Saved :",
-  JSON.parse(localStorage.getItem("currentUser"))
-);
-      navigate("/dashboard");
-      
-    } catch (error) {
-      alert(error.message);
     }
-  };
+
+    localStorage.setItem(
+      "currentUser",
+      JSON.stringify(result.user)
+    );
+
+    alert("Wallet Login Successful");
+
+    navigate("/dashboard");
+
+  } catch (error) {
+
+    alert(error.message);
+
+  }
+
+};
+
+
+      
+
+      
+      
+   
 
   return (
     <div
@@ -91,54 +72,67 @@ console.log(
         }}
       >
         <h1
-          style={{
-            textAlign: "center",
-            marginBottom: "30px",
-            color: "white",
-          }}
-        >
-          Login
-        </h1>
-
-        <input
-          type="text"
-          placeholder="Enter User ID"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "15px",
-            marginBottom: "20px",
-            borderRadius: "10px",
-            border: "none",
-            boxSizing: "border-box",
-          }}
-        />
-
-        <input
-          type="password"
-          placeholder="Enter Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "15px",
-            marginBottom: "20px",
-            borderRadius: "10px",
-            border: "none",
-            boxSizing: "border-box",
-          }}
-        />
-<p
-  onClick={() => navigate("/forgot-password")}
   style={{
-    cursor: "pointer",
-    color: "#4da6ff",
-    marginTop: "10px",
+    textAlign: "center",
+    marginBottom: "10px",
+    color: "#ffffff",
   }}
 >
-  Forgot Password?
+  Login
+</h1>
+
+<p
+  style={{
+    textAlign: "center",
+    color: "#94a3b8",
+    marginBottom: "30px",
+    fontSize: "15px",
+  }}
+>
+  Connect your OKX Wallet to continue
 </p>
+
+      <div
+  style={{
+    background: "#162248",
+    border: "1px solid #2d3b6b",
+    borderRadius: "10px",
+    padding: "15px",
+    marginBottom: "20px",
+    textAlign: "center",
+    color: "#94a3b8",
+    fontSize: "14px",
+  }}
+>
+  Wallet authentication will be used instead of User ID.
+</div>
+
+       <div
+  style={{
+    background: "#162248",
+    border: "1px solid #2d3b6b",
+    borderRadius: "10px",
+    padding: "15px",
+    marginBottom: "20px",
+    textAlign: "center",
+    color: "#22c55e",
+    fontSize: "14px",
+    fontWeight: "bold",
+  }}
+>
+  🔒 Login is secured by your OKX Wallet
+</div>
+       <div
+  style={{
+    textAlign: "center",
+    color: "#94a3b8",
+    fontSize: "13px",
+    marginBottom: "15px",
+  }}
+>
+  Don't have an OKX Wallet?
+</div>
+     
         <button
           onClick={handleLogin}
           style={{
@@ -151,8 +145,27 @@ console.log(
             cursor: "pointer",
           }}
         >
-          Login
+          Connect OKX Wallet
         </button>
+        <button
+  onClick={() =>
+    window.open("https://www.okx.com/web3", "_blank")
+  }
+  style={{
+    width: "100%",
+    padding: "15px",
+    marginTop: "12px",
+    border: "1px solid #4f46e5",
+    borderRadius: "10px",
+    background: "transparent",
+    color: "#ffffff",
+    cursor: "pointer",
+    fontWeight: "bold",
+    fontSize: "15px",
+  }}
+>
+  Open OKX Wallet
+</button>
       </div>
     </div>
   );
