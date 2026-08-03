@@ -2,6 +2,7 @@ import "./hero.css";
 import PlatformPreview from "../PlatformPreview/PlatformPreview";
 import { useNavigate } from "react-router-dom";
 import { joinNow } from "../../services/web3/auth/joinNow";
+import { openOkxWallet } from "../../services/web3/deeplink/openOkxWallet";
 function Hero() {
   const navigate = useNavigate();
   async function handleJoinNow() {
@@ -54,7 +55,12 @@ secure digital infrastructure and community-driven growth.
   >
     🔗 I Have OKX Wallet
   </button>
-
+        <button
+  className="secondary-btn"
+  onClick={() => openOkxWallet()}
+>
+  🚀 Test Open OKX
+</button>
   <button
     className="secondary-btn"
     onClick={() => navigate("/wallet-setup")}
