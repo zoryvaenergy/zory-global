@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ref, get } from "firebase/database";
 import { database } from "../firebase/firebaseConfig";
 import { getLevelTeam } from "../services/team/getLevelTeam";
-import { getCurrentUser } from "../services/user/getCurrentUser";
+import { getUserById } from "../services/user/getUserById";
 import MatrixList from "../components/partners/MatrixList";
 import MatrixDetails from "../components/partners/MatrixDetails";
 import DirectTeam from "../components/partners/DirectTeam";
@@ -27,9 +27,9 @@ const [searchTerm, setSearchTerm] = useState("");
 
     if (!savedUser) return;
 
-    const latestUser = await getCurrentUser(
-      savedUser.profile.userId
-    );
+    const latestUser = await getUserById(
+  savedUser.profile.userId
+);
 
     if (latestUser) {
       setCurrentUser(latestUser);

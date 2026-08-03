@@ -12,22 +12,33 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ReferralCard from "../components/dashboard/ReferralCard";
 import RightMenu from "../components/dashboard/RightMenu";
-import { getCurrentUser } from "../services/user/getCurrentUser";
+import { getUserById } from "../services/user/getUserById";
 function Dashboard() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
 
 useEffect(() => {
   async function loadUser() {
-    const savedUser = JSON.parse(
-      localStorage.getItem("currentUser")
-    );
+    const rawUser = localStorage.getItem("currentUser");
 
-    if (!savedUser) return;
+console.log("RAW =", rawUser);
 
-    const latestUser = await getCurrentUser(
-      savedUser.profile.userId
-    );
+if (!rawUser) {
+  console.log("No currentUser found");
+  return;
+}
+
+const savedUser = JSON.parse(rawUser);
+
+console.log("PARSED =", savedUser);
+console.log("PROFILE =", savedUser?.profile);
+
+if (!savedUser?.profile?.userId) {
+  console.log("userId missing");
+  return;
+}
+
+const latestUser = await getUserById(savedUser.profile.userId);
 console.log("Latest User :", latestUser);
 console.log("Wallet :", latestUser?.wallet);
     if (latestUser) {

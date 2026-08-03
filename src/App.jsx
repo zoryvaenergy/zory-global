@@ -11,11 +11,12 @@ import AdminDashboard from "./pages/AdminDashboard";
 import TestTeamEngine from "./pages/TestTeamEngine";
 import Wallet from "./pages/Wallet";
 import Web3Test from "./pages/Web3Test";
+import Web3Auth from "./pages/Web3Auth";
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-
+<Route path="/auth" element={<Web3Auth />} />
       <Route path="/login" element={<Login />} />
 
       <Route path="/register" element={<Register />} />

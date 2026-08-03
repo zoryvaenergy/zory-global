@@ -8,7 +8,7 @@
 
     width: 100%;
 
-    height: 80px;
+    height: 64px;
 
     display: flex;
 
@@ -16,7 +16,7 @@
 
     align-items: center;
 
-    padding: 0 70px;
+    padding: 0 16px;
 
     background: rgba(8,15,35,.75);
 
@@ -34,11 +34,11 @@
 
     color: white;
 
-    font-size: 30px;
+    font-size: 20px;
 
-    font-weight: 800;
+    font-weight: 900;
 
-    letter-spacing: 1px;
+    letter-spacing: 5px;
 
 }
 
@@ -107,20 +107,29 @@
 
 .menu-toggle{
 
-    display: none;
+    display:flex;
 
-    background: transparent;
+    align-items:center;
 
-    border: none;
+    justify-content:center;
 
-    color: white;
+    width:46px;
 
-    font-size: 32px;
+    height:46px;
 
-    cursor: pointer;
+    border-radius:12px;
+
+    background:#121b3b;
+
+    border:1px solid #2D3B6B;
+
+    color:#fff;
+
+    font-size:26px;
+
+    z-index:1002;
 
 }
-
 
 /* ==========================
    TABLET
@@ -169,7 +178,7 @@
 
         position:absolute;
 
-        top:70px;
+        top:64px;
 
         left:0;
 
@@ -196,7 +205,7 @@
         visibility:hidden;
 
         transition:.35s ease;
-
+box-shadow:0 15px 40px rgba(0,0,0,.35);
     }
 
     .nav-links.active{

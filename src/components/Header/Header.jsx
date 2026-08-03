@@ -74,11 +74,13 @@ function Header() {
 
       const user = await checkWalletExists(result.walletAddress);
 
-
+console.log("USER FROM checkWalletExists =", user);
+console.log("TYPE =", typeof user);
+console.log(checkWalletExists.toString());
 
       if (user) {
 
-
+console.log("Saving to localStorage =", JSON.stringify(user));
 
         localStorage.setItem(
 

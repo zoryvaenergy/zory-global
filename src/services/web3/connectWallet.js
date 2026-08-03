@@ -12,11 +12,21 @@ export async function connectWallet() {
     // Request Wallet Permission
     await provider.send("eth_requestAccounts", []);
 
+    // ===== DEBUG START =====
+    const accounts = await provider.send("eth_accounts", []);
+
+    console.log("==================================");
+    console.log("ALL ACCOUNTS :", accounts);
+
     // Signer
     const signer = await provider.getSigner();
 
     // Wallet Address
     const walletAddress = await signer.getAddress();
+
+    console.log("SIGNER ADDRESS :", walletAddress);
+    console.log("==================================");
+    // ===== DEBUG END =====
 
     // Network
     const network = await provider.getNetwork();

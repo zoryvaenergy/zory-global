@@ -46,13 +46,14 @@
     border-radius:15px;
     padding:20px;
     color:#ffffff;
-    transition:0.3s ease;
+     transition:.25s ease;
+
      background:#101935 !important;
     color:#ffffff !important;
 }
 
 .dashboard-card:hover{
-    transform:translateY(-5px);
+      transform:translateY(-4px);
     border-color:#4F46E5;
     box-shadow:0 10px 25px rgba(79,70,229,0.25);
 }
@@ -873,4 +874,84 @@ height:46px;
 
 .token-card:hover{
     box-shadow:0 0 35px rgba(79,70,229,.35);
+}
+/* ==========================
+   Dashboard Mobile
+========================== */
+
+@media (max-width:768px){
+
+.dashboard-header{
+
+    flex-direction:column;
+    align-items:flex-start;
+    gap:20px;
+
+    padding:20px;
+
+}
+
+.wallet-row{
+
+    width:100%;
+
+    flex-wrap:wrap;
+
+    gap:16px;
+
+}
+
+.wallet-address{
+
+    
+
+    word-break:break-all;
+ color:#d8def5;
+    font-size:15px;
+}
+
+.wallet-network{
+
+    display:block;
+
+    margin-top:8px;
+
+    font-size:13px;
+   color:#22c55e;
+}
+
+.dashboard-header-right{
+
+    width:100%;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+}
+
+.header-id-box{
+
+    flex:1;
+
+}
+
+.header-badge{
+
+    min-width:100%;
+
+}
+
+.header-value{
+
+    font-size:26px;
+
+}
+
+.header-divider{
+
+    display:none;
+
+}
+
 }

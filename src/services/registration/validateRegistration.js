@@ -5,10 +5,8 @@ export function validateRegistration(data) {
     throw new Error("Please connect your OKX Wallet.");
   }
 
-  // Sponsor Required
-  if (!data.sponsorId?.trim()) {
-    throw new Error("Sponsor ID is required.");
-  }
+  // Sponsor validation यहाँ नहीं होगी
+  // इसे validateSponsor() handle करेगा
 
   return true;
 }

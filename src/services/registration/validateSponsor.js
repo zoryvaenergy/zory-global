@@ -4,25 +4,27 @@ import { checkFirstUser } from "./checkFirstUser";
 
 export async function validateSponsor(sponsorId) {
 
-  // Check First User
   const isFirstUser = await checkFirstUser();
 
-  // Founder Registration
+  console.log("isFirstUser =", isFirstUser);
+
+  const snapshot = await get(ref(database, "users"));
+  console.log("users exists =", snapshot.exists());
+  console.log("users value =", snapshot.val());
+
   if (isFirstUser) {
+    console.log("Founder Registration");
     return true;
   }
 
-  // Sponsor Required
   if (!sponsorId) {
     throw new Error("Sponsor ID is required");
   }
 
-  // Check Sponsor Exists
   const sponsorRef = ref(database, `users/${sponsorId}`);
+  const sponsorSnapshot = await get(sponsorRef);
 
-  const snapshot = await get(sponsorRef);
-
-  if (!snapshot.exists()) {
+  if (!sponsorSnapshot.exists()) {
     throw new Error("Invalid Sponsor ID");
   }
 

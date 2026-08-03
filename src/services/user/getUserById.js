@@ -1,7 +1,7 @@
 import { ref, get } from "firebase/database";
 import { database } from "../../firebase/firebaseConfig";
 
-export async function getCurrentUser(userId) {
+export async function getUserById(userId) {
   try {
     const userRef = ref(database, `users/${userId}`);
 
@@ -13,7 +13,7 @@ export async function getCurrentUser(userId) {
 
     return snapshot.val();
   } catch (error) {
-    console.error("Get Current User Error :", error);
+    console.error("Get User By ID Error :", error);
     return null;
   }
 }

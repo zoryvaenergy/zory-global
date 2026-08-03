@@ -1,0 +1,65 @@
+.web3-auth{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:var(--bg-primary);
+    padding:20px;
+}
+
+.web3-card{
+    width:100%;
+    max-width:470px;
+    background:var(--card-bg);
+    border:1px solid var(--border-color);
+    border-radius:22px;
+    padding:40px 35px;
+    text-align:center;
+    box-shadow:0 0 35px rgba(0,0,0,.25);
+}
+
+.web3-logo{
+    font-size:2.4rem;
+    font-weight:700;
+    color:#fff;
+    margin-bottom:15px;
+}
+
+.web3-text{
+    color:var(--text-secondary);
+    line-height:1.7;
+    margin-bottom:35px;
+}
+
+.web3-button{
+
+    width:100%;
+    height:56px;
+
+    border:none;
+    border-radius:14px;
+
+    background:linear-gradient(90deg,#5B4DFF,#684BFF);
+
+    color:#fff;
+
+    font-size:17px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.web3-button:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.web3-button:disabled{
+
+    opacity:.7;
+    cursor:not-allowed;
+
+}

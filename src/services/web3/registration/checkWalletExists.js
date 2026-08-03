@@ -4,13 +4,13 @@ import { database } from "../../../firebase/firebaseConfig";
 export async function checkWalletExists(walletAddress) {
 
   if (!walletAddress) {
-    return false;
+    return null;
   }
 
   const snapshot = await get(ref(database, "users"));
 
   if (!snapshot.exists()) {
-    return false;
+    return null;
   }
 
   const users = snapshot.val();
@@ -27,9 +27,12 @@ export async function checkWalletExists(walletAddress) {
       savedWallet.toLowerCase() ===
         walletAddress.toLowerCase()
     ) {
-      return true;
+
+      // ✅ पूरा user object return होगा
+      return user;
+
     }
   }
 
-  return false;
+  return null;
 }

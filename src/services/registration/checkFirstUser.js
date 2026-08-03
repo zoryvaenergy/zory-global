@@ -7,12 +7,15 @@ export async function checkFirstUser() {
 
   const snapshot = await get(usersRef);
 
-  // Database खाली है
+  console.log("Users Exists =", snapshot.exists());
+  console.log("Users Value =", snapshot.val());
+
   if (!snapshot.exists()) {
+    console.log("FIRST USER");
     return true;
   }
 
-  // कम से कम एक User मौजूद है
-  return false;
+  console.log("NOT FIRST USER");
 
+  return false;
 }

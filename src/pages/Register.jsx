@@ -1,15 +1,22 @@
-import { getCurrentAccount } from "../services/web3/walletService";
+
 import { useState, useEffect } from "react";
 import { sendPayment } from "../services/web3/payment/sendPayment";
 import { registerUser } from "../services/registration/registerUser";
 import SuccessModal from "../components/auth/SuccessModal/SuccessModal";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { savePayment } from "../services/web3/payment/savePayment";
 import { verifyPayment } from "../services/web3/payment/verifyPayment";
-import { connectWallet } from "../services/web3/connectWallet";
+
 import { checkWalletExists } from "../services/web3/registration/checkWalletExists";
+
+
 function Register() {
   const navigate = useNavigate();
+  const location = useLocation();
+  console.log(
+  "Wallet From Web3Auth :",
+  location.state?.walletAddress
+);
   const [showSuccess, setShowSuccess] = useState(false);
   const [successData, setSuccessData] = useState({
   
@@ -20,34 +27,38 @@ function Register() {
  
   const [sponsorId, setSponsorId] = useState("");
 const [loading, setLoading] = useState(false);
-const [walletAddress, setWalletAddress] = useState("");
+const [walletAddress] = useState(
+  location.state?.walletAddress || ""
+);
 useEffect(() => {
 
-  async function loadWallet() {
+  if (!walletAddress) {
 
-    const wallet = await getCurrentAccount();
-
-    if (wallet) {
-      setWalletAddress(wallet);
-    }
+    navigate("/auth", {
+      replace: true,
+    });
 
   }
 
-  loadWallet();
+}, [walletAddress, navigate]);
 
-}, []);
-       const handleConnectWallet = async () => {
+//useEffect(() => {
 
-  const result = await connectWallet();
+  //async function loadWallet() {
 
-  if (!result.success) {
-    alert(result.message);
-    return;
-  }
+    //const wallet = await getCurrentAccount();
 
-  setWalletAddress(result.walletAddress);
+    //if (wallet) {
+    //  setWalletAddress(wallet);
+    //}
 
-};
+  //}
+
+  //loadWallet();
+
+//}, []);
+     
+      
   const handleRegister = async () => {
     console.log("Wallet :", walletAddress);
     
@@ -161,55 +172,15 @@ setShowSuccess(true);
   Become a member of the decentralized ZORY GLOBAL community using your wallet.
 </p>
 
-        
-
-       
-
-        
-        
-
-        
-
-        <input
+  <input
   type="text"
   placeholder="Sponsor ID (Optional)"
   style={inputStyle}
   value={sponsorId}
   onChange={(e) => setSponsorId(e.target.value)}
 />
-    <button
-  onClick={handleConnectWallet}
-  style={{
-    width: "100%",
-    padding: "15px",
-    marginBottom: "18px",
-    border: "none",
-    borderRadius: "10px",
-    background: walletAddress ? "#16a34a" : "#f59e0b",
-    color: "#fff",
-    cursor: "pointer",
-    fontSize: "16px",
-    fontWeight: "bold",
-  }}
->
-  {walletAddress
-    ? "✅ Wallet Connected"
-    : "🔗 Connect OKX Wallet"}
-</button>
-{walletAddress && (
-  <div
-    style={{
-      marginBottom: "20px",
-      color: "#22c55e",
-      fontSize: "14px",
-      wordBreak: "break-all",
-      textAlign: "center",
-    }}
-  >
-    {walletAddress}
-  </div>
-)}
-        <button
+
+  <button
   onClick={handleRegister}
   disabled={loading}
   style={{
@@ -242,7 +213,6 @@ setShowSuccess(true);
     </div>
   );
 }
-
 const inputStyle = {
   width: "100%",
   padding: "15px",
@@ -252,5 +222,4 @@ const inputStyle = {
   outline: "none",
   fontSize: "15px",
 };
-
 export default Register;
