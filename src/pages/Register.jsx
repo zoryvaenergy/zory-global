@@ -25,7 +25,13 @@ function Register() {
   status: "",
 });
  
-  const [sponsorId, setSponsorId] = useState("");
+  const [sponsorId, setSponsorId] = useState(
+  sessionStorage.getItem("referralId") || ""
+);
+console.log(
+  "Referral From Session:",
+  sessionStorage.getItem("referralId")
+);
 const [loading, setLoading] = useState(false);
 const [walletAddress] = useState(
   location.state?.walletAddress || ""

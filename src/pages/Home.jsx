@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import Footer from "../components/Footer/Footer";
 import About from "../components/About/About";
 import WhyChoose from "../components/WhyChoose/WhyChoose";
@@ -9,6 +11,20 @@ import Hero from "../components/Hero/Hero";
 import Stats from "../components/Stats/Stats";
 
 function Home() {
+  const [searchParams] = useSearchParams();
+  useEffect(() => {
+
+  const ref = searchParams.get("ref");
+
+  if (ref) {
+
+    sessionStorage.setItem("referralId", ref);
+
+    console.log("Referral :", ref);
+
+  }
+
+}, [searchParams]);
   return (
     <div style={{ textAlign: "center" }}>
       <Header />
