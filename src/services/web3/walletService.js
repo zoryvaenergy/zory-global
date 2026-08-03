@@ -76,3 +76,47 @@ export async function getCurrentNetwork() {
   return await provider.getNetwork();
 
 }
+// Verify Current Wallet
+export async function verifyCurrentWallet(savedWallet) {
+
+  try {
+
+    const currentWallet = await getCurrentAccount();
+
+    if (!currentWallet) {
+
+      return {
+        success: false,
+        reason: "NOT_CONNECTED",
+      };
+
+    }
+
+    if (
+      currentWallet.toLowerCase() !==
+      savedWallet.toLowerCase()
+    ) {
+
+      return {
+        success: false,
+        reason: "WALLET_CHANGED",
+      };
+
+    }
+
+    return {
+      success: true,
+      wallet: currentWallet,
+    };
+
+  } catch (error) {
+
+    return {
+      success: false,
+      reason: "ERROR",
+      message: error.message,
+    };
+
+  }
+
+}

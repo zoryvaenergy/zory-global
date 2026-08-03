@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import ReferralCard from "../components/dashboard/ReferralCard";
 import RightMenu from "../components/dashboard/RightMenu";
 import { getUserById } from "../services/user/getUserById";
+import { verifyCurrentWallet } from "../services/web3/walletService";
 function Dashboard() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
@@ -39,6 +40,23 @@ if (!savedUser?.profile?.userId) {
 }
 
 const latestUser = await getUserById(savedUser.profile.userId);
+const verify = await verifyCurrentWallet(
+  latestUser.wallet.address
+);
+
+console.log("Wallet Verify :", verify);
+
+if (!verify.success) {
+
+  localStorage.removeItem("currentUser");
+
+  alert("Wallet Changed. Please connect again.");
+
+  navigate("/auth");
+
+  return;
+
+}
 console.log("Latest User :", latestUser);
 console.log("Wallet :", latestUser?.wallet);
     if (latestUser) {
@@ -53,6 +71,7 @@ console.log("Wallet :", latestUser?.wallet);
   const handleLogout = async () => {
     try {
       await signOut(auth);
+      localStorage.removeItem("currentUser");
       alert("Logout successful");
       navigate("/login");
     } catch (error) {

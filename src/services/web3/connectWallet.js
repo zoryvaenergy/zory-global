@@ -6,63 +6,98 @@ import { getWalletProvider } from "./walletService";
  */
 
 export async function connectWallet() {
+
   try {
+
+    // Wallet Installed?
+    if (!window.ethereum) {
+
+      const install = window.confirm(
+        "No Web3 Wallet Found.\n\nInstall OKX Wallet?"
+      );
+
+      if (install) {
+
+        window.open(
+          "https://www.okx.com/web3",
+          "_blank"
+        );
+
+      }
+
+      return {
+
+        success: false,
+
+        message: "Wallet not installed",
+
+      };
+
+    }
+
     const provider = getWalletProvider();
 
-    // Request Wallet Permission
+    // Request Permission
     await provider.send("eth_requestAccounts", []);
 
-    // ===== DEBUG START =====
     const accounts = await provider.send("eth_accounts", []);
 
     console.log("==================================");
     console.log("ALL ACCOUNTS :", accounts);
 
-    // Signer
     const signer = await provider.getSigner();
 
-    // Wallet Address
     const walletAddress = await signer.getAddress();
 
     console.log("SIGNER ADDRESS :", walletAddress);
     console.log("==================================");
-    // ===== DEBUG END =====
 
-    // Network
     const network = await provider.getNetwork();
 
-    // Chain ID
     const chainId = Number(network.chainId);
 
-    // Wallet Type
     let walletType = "Unknown";
 
-    if (window.ethereum?.isTrust) {
-      walletType = "Trust Wallet";
-    } else if (window.ethereum?.isMetaMask) {
-      walletType = "MetaMask";
-    } else if (window.ethereum?.isOkxWallet) {
+    if (window.ethereum?.isOkxWallet) {
+
       walletType = "OKX Wallet";
+
+    } else if (window.ethereum?.isTrust) {
+
+      walletType = "Trust Wallet";
+
+    } else if (window.ethereum?.isMetaMask) {
+
+      walletType = "MetaMask";
+
     }
 
-    console.log("✅ Wallet Connected");
-
     return {
+
       success: true,
+
       walletAddress,
+
       walletType,
+
       network: network.name,
+
       chainId,
+
     };
 
   } catch (error) {
 
-    console.error("❌ Wallet Connection Failed", error);
+    console.error(error);
 
     return {
+
       success: false,
+
       message: error.message,
+
     };
 
   }
+
 }
