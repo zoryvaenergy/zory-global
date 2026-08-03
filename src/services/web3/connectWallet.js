@@ -18,10 +18,8 @@ export async function connectWallet() {
 
       if (install) {
 
-        window.open(
-          "https://www.okx.com/web3",
-          "_blank"
-        );
+        window.location.href =
+  "https://web3.okx.com";
 
       }
 
