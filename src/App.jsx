@@ -13,7 +13,7 @@ import TestTeamEngine from "./pages/TestTeamEngine";
 import Wallet from "./pages/Wallet";
 import Web3Test from "./pages/Web3Test";
 import Web3Auth from "./pages/Web3Auth";
-
+import WalletSetup from "./pages/WalletSetup";
 import WalletListener from "./services/web3/session/WalletListener";
 
 function App() {
@@ -25,6 +25,11 @@ function App() {
         <Route path="/" element={<Home />} />
 
         <Route path="/auth" element={<Web3Auth />} />
+
+<Route
+  path="/wallet-setup"
+  element={<WalletSetup />}
+/>
 
         <Route path="/login" element={<Login />} />
 

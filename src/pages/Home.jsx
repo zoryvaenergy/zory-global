@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer/Footer";
 import About from "../components/About/About";
 import WhyChoose from "../components/WhyChoose/WhyChoose";
@@ -11,20 +11,22 @@ import Hero from "../components/Hero/Hero";
 import Stats from "../components/Stats/Stats";
 
 function Home() {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  useEffect(() => {
+    useEffect(() => {
 
   const ref = searchParams.get("ref");
 
-  if (ref) {
+  if (!ref) return;
 
-    sessionStorage.setItem("referralId", ref);
+  sessionStorage.setItem("referralId", ref);
 
-    console.log("Referral :", ref);
+  console.log("Referral :", ref);
 
-  }
+  navigate("/auth", { replace: true });
 
-}, [searchParams]);
+}, [searchParams, navigate]);
+
   return (
     <div style={{ textAlign: "center" }}>
       <Header />

@@ -47,17 +47,22 @@ secure digital infrastructure and community-driven growth.
         </p>
 
         <div className="hero-buttons">
-          <button
-  className="primary-btn"
-  onClick={handleJoinNow}
->
-  Join Now
-</button>
 
-          <button className="secondary-btn">
-            Learn More
-          </button>
-        </div>
+  <button
+    className="primary-btn"
+    onClick={handleJoinNow}
+  >
+    🔗 I Have OKX Wallet
+  </button>
+
+  <button
+    className="secondary-btn"
+    onClick={() => navigate("/wallet-setup")}
+  >
+    📱 New User? Setup Wallet
+  </button>
+
+</div>
 
         <div className="hero-features">
           <div className="feature-card">
