@@ -1,0 +1,205 @@
+.wallet-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.72);
+    backdrop-filter:blur(8px);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+    padding:20px;
+}
+
+.wallet-modal{
+    width:100%;
+    max-width:520px;
+    background:#10192d;
+    border:1px solid rgba(78,124,255,.18);
+    border-radius:24px;
+    padding:28px;
+    position:relative;
+    animation:walletPopup .25s ease;
+    box-shadow:0 25px 60px rgba(0,0,0,.45);
+}
+
+@keyframes walletPopup{
+
+    from{
+        opacity:0;
+        transform:translateY(20px) scale(.96);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+
+}
+
+.wallet-modal h2{
+
+    margin:0;
+    text-align:center;
+    color:#fff;
+    font-size:30px;
+    font-weight:700;
+
+}
+
+.wallet-modal p{
+
+    margin:10px 0 30px;
+    text-align:center;
+    color:#9fb2d9;
+
+}
+
+.wallet-close{
+
+    position:absolute;
+    right:18px;
+    top:18px;
+
+    width:40px;
+    height:40px;
+
+    border:none;
+    border-radius:50%;
+
+    cursor:pointer;
+
+    color:#fff;
+
+    background:#22365d;
+
+    transition:.25s;
+
+}
+
+.wallet-close:hover{
+
+    background:#3868ff;
+
+}
+
+.wallet-items{
+
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+
+}
+
+.wallet-item{
+
+    width:100%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    border:none;
+    cursor:pointer;
+
+    background:#182542;
+
+    border-radius:16px;
+
+    padding:18px 20px;
+
+    transition:.25s;
+
+    color:#fff;
+
+}
+
+.wallet-item:hover{
+
+    background:#22418d;
+
+    transform:translateY(-2px);
+
+}
+
+.wallet-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+}
+
+.wallet-icon{
+
+    width:52px;
+    height:52px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:28px;
+
+    background:#243a67;
+
+    border-radius:14px;
+
+}
+
+.wallet-item h3{
+
+    margin:0;
+
+    font-size:18px;
+
+}
+
+.wallet-item span{
+
+    color:#9fb2d9;
+
+    font-size:13px;
+
+}
+
+.wallet-item svg:last-child{
+
+    color:#8aa7ff;
+
+    font-size:18px;
+
+}
+
+@media(max-width:640px){
+
+.wallet-modal{
+
+    padding:22px;
+
+}
+
+.wallet-modal h2{
+
+    font-size:24px;
+
+}
+
+.wallet-icon{
+
+    width:46px;
+    height:46px;
+    font-size:24px;
+
+}
+
+.wallet-item{
+
+    padding:16px;
+
+}
+
+}
