@@ -53,7 +53,7 @@ export async function connectWallet() {
     const network = await provider.getNetwork();
 
     const chainId = Number(network.chainId);
-
+console.log("CURRENT CHAIN ID :", chainId);
     let walletType = "Unknown";
 
     if (window.ethereum?.isOkxWallet) {
