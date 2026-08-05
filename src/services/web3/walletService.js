@@ -42,7 +42,13 @@ export async function switchNetwork() {
   if (!isWalletInstalled()) {
     throw new Error("Wallet not installed");
   }
+const confirmSwitch = window.confirm(
+  "⚠️ ZORY GLOBAL works only on BNB Smart Chain.\n\nSwitch your wallet to BNB Smart Chain?"
+);
 
+if (!confirmSwitch) {
+  return false;
+}
   try {
 
     await window.ethereum.request({
@@ -52,12 +58,54 @@ export async function switchNetwork() {
 
     return true;
 
-  } catch (error) {
-
-    console.error("Switch Network Error :", error);
-
-    return false;
   }
+  catch (error) {
+
+  console.error("Switch Network Error :", error);
+
+  // Chain Not Added
+  if (error.code === 4902) {
+
+    try {
+
+      await window.ethereum.request({
+        method: "wallet_addEthereumChain",
+        params: [
+          {
+            chainId: "0x38",
+            chainName: "BNB Smart Chain",
+            nativeCurrency: {
+              name: "BNB",
+              symbol: "BNB",
+              decimals: 18,
+            },
+            rpcUrls: [
+              "https://bsc-dataseed.binance.org/",
+            ],
+            blockExplorerUrls: [
+              "https://bscscan.com",
+            ],
+          },
+        ],
+      });
+
+      return true;
+
+    } catch (addError) {
+
+      console.error(
+        "Add Network Error :",
+        addError
+      );
+
+      return false;
+
+    }
+
+  }
+
+  return false;
+}
 
 }
 // Wallet Signer
