@@ -6,7 +6,7 @@
  */
 
 import { launchOkx } from "./okxLauncher";
-
+import { launchTrust } from "./launchTrust";
 export async function launchWallet(walletId) {
 
   try {
@@ -25,8 +25,7 @@ export async function launchWallet(walletId) {
         return;
 
       case "trustwallet":
-        console.log("Launch Trust Wallet");
-        return;
+  return await launchTrust();
 
       default:
         console.warn("Unknown Wallet :", walletId);

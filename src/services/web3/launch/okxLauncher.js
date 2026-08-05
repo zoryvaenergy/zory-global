@@ -15,10 +15,11 @@ export async function launchOkx() {
 
   const browser = detectWalletBrowser();
 
-  const strategy = chooseLaunchStrategy(
-    environment,
-    browser
-  );
+ const strategy = chooseLaunchStrategy(
+  environment,
+  browser,
+  "okx"
+);
 
   console.log("Environment :", environment);
   console.log("Browser :", browser);
@@ -40,10 +41,32 @@ export async function launchOkx() {
   openOkxApp();
   break;
 
-    case "WALLET_CONNECT":
-      alert("Desktop WalletConnect");
-      break;
+    case "WALLET_CONNECT": {
 
+  if (window.ethereum?.isOkxWallet) {
+
+    const result = await connectOkx();
+
+    console.log(result);
+
+    break;
+
+  }
+
+  const install = window.confirm(
+    "OKX Wallet Extension is not installed.\n\nInstall OKX Wallet?"
+  );
+
+  if (install) {
+   window.open(
+  "https://www.okx.com/download",
+  "_blank"
+);
+  }
+
+  break;
+
+}
     case "IOS_DEEPLINK":
       alert("Open OKX on iPhone");
       break;
