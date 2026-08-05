@@ -1,15 +1,18 @@
 /**
  * ==========================================
  * ZORY GLOBAL
- * Open OKX App
+ * Open OKX App (Android Intent Test)
  * ==========================================
  */
 
-export function openOkxApp() {
+export function openOkxApp(dappUrl = window.location.href) {
 
   console.log("Opening OKX App...");
 
-  // Sprint 3.2
-  // Real Launch Logic yahin aayega
+  const intentUrl =
+    `intent://${dappUrl.replace(/^https?:\/\//, "")}` +
+    `#Intent;scheme=https;package=com.okinc.okex.gp;end`;
+
+  window.location.href = intentUrl;
 
 }
