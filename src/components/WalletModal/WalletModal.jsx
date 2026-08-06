@@ -44,6 +44,8 @@ async function handleWallet(wallet) {
   
 const result = await launchWallet(wallet.id);
 
+alert(JSON.stringify(result));
+
 console.log(result);
 
 if (result?.success) {
