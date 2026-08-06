@@ -4,7 +4,9 @@ import { updateWallet } from "../wallet/updateWallet";
 import { saveIncomeHistory } from "./incomeHistory";
 import { transactionGuard } from "../system/transactionGuard";
 import { updateIncome } from "./updateIncome";
+
 export async function directIncomeEngine(userId) {
+
   // Registered User
   const userRef = ref(database, `users/${userId}`);
   const userSnap = await get(userRef);
@@ -16,15 +18,16 @@ export async function directIncomeEngine(userId) {
 
   const user = userSnap.val();
   const sponsorId = user.profile?.sponsorId;
+
   // Duplicate Protection
-const transactionId = `DIRECT_${userId}`;
+  const transactionId = `DIRECT_${userId}`;
 
-const allowed = await transactionGuard(transactionId);
+  const allowed = await transactionGuard(transactionId);
 
-if (!allowed) {
-  console.log("⚠️ Direct Income Already Processed");
-  return;
-}
+  if (!allowed) {
+    console.log("⚠️ Direct Income Already Processed");
+    return;
+  }
 
   // No Sponsor
   if (!sponsorId) {
@@ -41,15 +44,29 @@ if (!allowed) {
     return;
   }
 
-  // Give Direct Income
+  // ==========================
+  // DEBUG
+  // ==========================
+
+  console.log("STEP A : updateWallet");
+
   await updateWallet(sponsorId, "direct", 2);
+
+  console.log("STEP B : updateIncome");
+
   await updateIncome(sponsorId, "direct", 2);
-await saveIncomeHistory({
-  userId: sponsorId,
-  type: "direct",
-  amount: 2,
-  fromUserId: userId,
-  remark: "Direct Referral Income",
-});
+
+  console.log("STEP C : saveHistory");
+
+  await saveIncomeHistory({
+    userId: sponsorId,
+    type: "direct",
+    amount: 2,
+    fromUserId: userId,
+    remark: "Direct Referral Income",
+  });
+
+  console.log("STEP D : Finished");
+
   console.log(`✅ Direct Income +2 given to ${sponsorId}`);
 }

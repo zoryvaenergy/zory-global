@@ -133,14 +133,37 @@ setSuccessData({
 });
 
 setShowSuccess(true);
+console.log("STEP 1");
 
+setSuccessData({
+  memberName: newUser.memberName,
+  memberId: newUser.userId,
+  sponsorId: newUser.sponsorId,
+  status: newUser.status,
+  user: newUser.user,
+});
+
+console.log("STEP 2");
+
+setShowSuccess(true);
+
+console.log("STEP 3");
       
       setSponsorId("");
     } catch (error) {
+
+  console.error("REGISTER ERROR =>", error);
+
+  console.error("STACK =>", error.stack);
+
   alert(error.message);
+
 } finally {
+
   setLoading(false);
+
 }
+
   };
 
   return (

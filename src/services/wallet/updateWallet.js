@@ -1,36 +1,37 @@
-import { ref, runTransaction } from "firebase/database";
+import { ref, get, update } from "firebase/database";
 import { database } from "../../firebase/firebaseConfig";
 
 export async function updateWallet(userId, incomeType, amount) {
   const walletRef = ref(database, `users/${userId}/wallet`);
 
-  await runTransaction(walletRef, (wallet) => {
-    if (!wallet) return wallet;
+  const snap = await get(walletRef);
 
-    // Main Wallet
-    wallet.mainWallet = (wallet.mainWallet || 0) + amount;
+  if (!snap.exists()) {
+    throw new Error("Wallet not found");
+  }
 
-    // Total Income
-    wallet.totalIncome = (wallet.totalIncome || 0) + amount;
+  const wallet = snap.val();
 
-    // Income Type Wise
-    switch (incomeType) {
-      case "direct":
-        wallet.directIncome = (wallet.directIncome || 0) + amount;
-        break;
+  const updates = {
+    mainWallet: (wallet.mainWallet || 0) + amount,
+    totalIncome: (wallet.totalIncome || 0) + amount,
+  };
 
-      case "level":
-        wallet.levelIncome = (wallet.levelIncome || 0) + amount;
-        break;
+  switch (incomeType) {
+    case "direct":
+      updates.directIncome = (wallet.directIncome || 0) + amount;
+      break;
 
-      case "pool":
-        wallet.poolIncome = (wallet.poolIncome || 0) + amount;
-        break;
+    case "level":
+      updates.levelIncome = (wallet.levelIncome || 0) + amount;
+      break;
 
-      default:
-        break;
-    }
+    case "pool":
+      updates.poolIncome = (wallet.poolIncome || 0) + amount;
+      break;
+  }
 
-    return wallet;
-  });
+  await update(walletRef, updates);
+
+  console.log("✅ Wallet Updated");
 }

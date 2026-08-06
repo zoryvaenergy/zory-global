@@ -1,35 +1,41 @@
-import { ref, runTransaction } from "firebase/database";
+import { ref, get, update } from "firebase/database";
 import { database } from "../../firebase/firebaseConfig";
 
 export async function updateIncome(userId, incomeType, amount) {
   const incomeRef = ref(database, `users/${userId}/income`);
 
-  await runTransaction(incomeRef, (income) => {
-    if (!income) {
-      income = {
-        direct: 0,
-        level: 0,
-        pool: 0,
-      };
-    }
+  const snap = await get(incomeRef);
 
-    switch (incomeType) {
-      case "direct":
-        income.direct = (income.direct || 0) + amount;
-        break;
+  let income = {
+    direct: 0,
+    level: 0,
+    pool: 0,
+  };
 
-      case "level":
-        income.level = (income.level || 0) + amount;
-        break;
+  if (snap.exists()) {
+    income = snap.val();
+  }
 
-      case "pool":
-        income.pool = (income.pool || 0) + amount;
-        break;
+  const updates = {};
 
-      default:
-        break;
-    }
+  switch (incomeType) {
+    case "direct":
+      updates.direct = (income.direct || 0) + amount;
+      break;
 
-    return income;
-  });
+    case "level":
+      updates.level = (income.level || 0) + amount;
+      break;
+
+    case "pool":
+      updates.pool = (income.pool || 0) + amount;
+      break;
+
+    default:
+      return;
+  }
+
+  await update(incomeRef, updates);
+
+  console.log("✅ Income Updated");
 }

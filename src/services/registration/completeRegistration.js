@@ -6,6 +6,7 @@ import { directIncomeEngine } from "../income/directIncomeEngine";
 import { tokenEngine } from "../token/tokenEngine";
 import { levelIncomeEngine } from "../income/levelIncomeEngine";
 import { updateLevelSponsorChain } from "../team/updateLevelSponsorChain";
+
 export async function completeRegistration(userId, sponsorId) {
 
   // Step 1 : Pool Entry
@@ -27,20 +28,66 @@ export async function completeRegistration(userId, sponsorId) {
   await updateSponsorChain(sponsorId);
 
   console.log("✅ Sponsor Chain Updated");
-await updateLevelSponsorChain(sponsorId);
 
-console.log("✅ Level Sponsor Chain Updated");
+  await updateLevelSponsorChain(sponsorId);
+
+  console.log("✅ Level Sponsor Chain Updated");
+
+  // =====================================
   // Step 5 : Direct Income
-  await directIncomeEngine(userId);
+  // =====================================
 
-  console.log("✅ Direct Income Added");
-await levelIncomeEngine(userId);
+  try {
 
-console.log("✅ Level Income Added");
-  // Step 6 : Token Bonus
-  await tokenEngine(userId);
+    await directIncomeEngine(userId);
 
-  console.log("✅ Token Bonus Added");
+    console.log("✅ Direct Income Added");
+
+  } catch (error) {
+
+    console.error("❌ DIRECT INCOME ERROR :", error);
+
+    throw error;
+
+  }
+
+  // =====================================
+  // Step 6 : Level Income
+  // =====================================
+
+  try {
+
+    await levelIncomeEngine(userId);
+
+    console.log("✅ Level Income Added");
+
+  } catch (error) {
+
+    console.error("❌ LEVEL INCOME ERROR :", error);
+
+    throw error;
+
+  }
+
+  // =====================================
+  // Step 7 : Token Engine
+  // =====================================
+
+  try {
+
+    await tokenEngine(userId);
+
+    console.log("✅ Token Bonus Added");
+
+  } catch (error) {
+
+    console.error("❌ TOKEN ENGINE ERROR :", error);
+
+    throw error;
+
+  }
+
+  console.log("✅ Registration Completed");
 
   return poolResult;
 }
