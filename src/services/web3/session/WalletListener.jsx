@@ -9,22 +9,14 @@ function WalletListener() {
 
     if (!window.ethereum) return;
 
-    const handleAccountsChanged = () => {
+   const handleAccountsChanged = (accounts) => {
 
-      localStorage.removeItem("currentUser");
+  console.log("Accounts Changed :", accounts);
 
-      alert("Wallet changed. Please connect again.");
+};
+     const handleChainChanged = () => {
 
-      navigate("/auth");
-
-    };
-      const handleChainChanged = () => {
-
-  localStorage.removeItem("currentUser");
-
-  alert("Network changed. Please reconnect your wallet.");
-
-  navigate("/auth");
+  console.log("Chain Changed");
 
 };
     window.ethereum.on(

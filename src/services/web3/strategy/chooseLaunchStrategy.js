@@ -5,7 +5,11 @@
  * ==========================================
  */
 
-export function chooseLaunchStrategy(environment, browser) {
+export function chooseLaunchStrategy(
+  environment,
+  browser,
+  walletId
+) {
 
   // Already inside OKX DApp Browser
   if (browser.isOkx) {
@@ -13,9 +17,22 @@ export function chooseLaunchStrategy(environment, browser) {
   }
 
   // Android Chrome
-  if (environment.isAndroid) {
-    return "OPEN_OKX_APP";
+if (environment.isAndroid) {
+
+  switch (walletId) {
+
+    case "okx":
+      return "OPEN_OKX_APP";
+
+    case "trustwallet":
+      return "OPEN_TRUST_APP";
+
+    default:
+      return "UNKNOWN";
+
   }
+
+}
 
   // Desktop Browser
   if (environment.isDesktop) {

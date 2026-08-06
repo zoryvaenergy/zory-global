@@ -1,4 +1,5 @@
 import { connectWallet } from "../connectWallet";
+import { getCurrentWallet } from "../getCurrentWallet";
 import { checkWallet } from "./checkWallet";
 
 /**
@@ -7,8 +8,15 @@ import { checkWallet } from "./checkWallet";
 
 export async function loginWallet() {
 
-  // Connect Wallet
-  const wallet = await connectWallet();
+  // Check if wallet is already connected
+let wallet = await getCurrentWallet();
+
+// If not connected, connect now
+if (!wallet) {
+
+  wallet = await connectWallet();
+
+}
 
   if (!wallet.success) {
     return wallet;

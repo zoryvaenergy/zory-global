@@ -1,5 +1,6 @@
 import { launchWallet } from "../../services/web3/launch/launchWallet";
 import "./walletModal.css";
+import { saveSelectedWallet } from "../../services/web3/storage/saveSelectedWallet";
 import {
   FaTimes,
   FaChevronRight
@@ -7,53 +8,52 @@ import {
 
 const wallets = [
   {
-    id: "okx",
-    name: "OKX Wallet",
-    status: "Recommended",
-    active: true,
-    icon: "🟢"
-  },
-  {
-    id: "tokenpocket",
-    name: "TokenPocket",
-    status: "Coming Soon",
-    active: false,
-    icon: "🟣"
-  },
-  {
-    id: "metamask",
-    name: "MetaMask",
-    status: "Coming Soon",
-    active: false,
-    icon: "🦊"
-  },
-  {
     id: "trustwallet",
     name: "Trust Wallet",
-    status: "Coming Soon",
-    active: false,
-    icon: "🔵"
-  }
+    status: "Recommended",
+    active: true,
+    icon: "🔵",
+  },
 ];
 
 function WalletModal({
   isOpen,
-  onClose
+  onClose,
+  onConnected
 }) {
+
+
 
   if (!isOpen) return null;
 
-  function handleWallet(wallet){
-
-    if (!wallet.active) {
-  alert(`${wallet.name} will be available soon.`);
-  return;
-}
-
-launchWallet(wallet.id);
-
+  
+async function handleWallet(wallet) {
+  if (!wallet.active) {
+    alert(`${wallet.name} will be available soon.`);
+    return;
   }
 
+  // Selected Wallet Save
+  saveSelectedWallet(wallet.id);
+
+  console.log(
+    "Selected Wallet :",
+    wallet.id
+  );
+
+  
+const result = await launchWallet(wallet.id);
+
+console.log(result);
+
+if (result?.success) {
+
+  onClose();
+
+  onConnected();
+
+}
+}
   return (
 
     <div
@@ -74,13 +74,12 @@ launchWallet(wallet.id);
         </button>
 
         <h2>
-          Connect Wallet
-        </h2>
+  Connect Trust Wallet
+</h2>
 
-        <p>
-          Select your preferred Web3 Wallet
-        </p>
-
+<p>
+  Securely connect your Trust Wallet to continue.
+</p>
         <div className="wallet-items">
 
           {

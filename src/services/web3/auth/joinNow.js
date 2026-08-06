@@ -8,6 +8,9 @@ import { switchNetwork } from "../walletService";
 export async function joinNow() {
 
   const result = await loginWallet();
+  if (!result.success && !result.wallet) {
+  return result;
+}
 if (result.wallet?.chainId !== 56) {
 
   const switched = await switchNetwork();

@@ -12,12 +12,13 @@ import { checkWalletExists } from "../services/web3/registration/checkWalletExis
 
 function Register() {
   const navigate = useNavigate();
-  const location = useLocation();
-  console.log(
-  "Wallet From Web3Auth :",
-  location.state?.walletAddress
-);
-  const [showSuccess, setShowSuccess] = useState(false);
+const location = useLocation();
+
+const wallet = location.state?.wallet;
+
+console.log("Wallet :", wallet);
+
+const [showSuccess, setShowSuccess] = useState(false);
   const [successData, setSuccessData] = useState({
   
   memberId: "",
@@ -33,8 +34,10 @@ console.log(
   sessionStorage.getItem("referralId")
 );
 const [loading, setLoading] = useState(false);
+
+
 const [walletAddress] = useState(
-  location.state?.walletAddress || ""
+  wallet?.walletAddress || ""
 );
 useEffect(() => {
 
@@ -110,16 +113,23 @@ const newUser = await registerUser({
   sponsorId,
 
   walletAddress,
-
-  provider: "OKX Wallet",
-  network: "BNB Chain",
-  chainId: 56,
+ provider: wallet?.walletType,
+  network: wallet?.network,
+  chainId: wallet?.chainId,
+  
 });
 setSuccessData({
-  
+
+  memberName: newUser.memberName,
+
   memberId: newUser.userId,
+
   sponsorId: newUser.sponsorId,
+
   status: newUser.status,
+
+  user: newUser.user,
+
 });
 
 setShowSuccess(true);
@@ -212,9 +222,15 @@ setShowSuccess(true);
   sponsorId={successData.sponsorId}
   status={successData.status}
   onContinue={() => {
-  setShowSuccess(false);
-  navigate("/login");
-}}
+    setShowSuccess(false);
+
+   localStorage.setItem(
+  "currentUser",
+  JSON.stringify(successData.user)
+);
+
+    navigate("/dashboard");
+  }}
 />
     </div>
   );

@@ -68,7 +68,7 @@ export default function SuccessModal({
           className="success-btn"
           onClick={onContinue}
         >
-          Continue to Secure Login →
+          Continue to Dashboard →
         </button>
 
       </div>

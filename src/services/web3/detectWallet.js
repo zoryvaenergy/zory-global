@@ -1,27 +1,29 @@
-export function detectWallets() {
+/**
+ * ==========================================
+ * ZORY GLOBAL
+ * Detect Installed Wallet Browsers
+ * ==========================================
+ */
 
-  return [
+export function detectWalletBrowser() {
 
-    {
-      id: "okx",
-      name: "OKX Wallet",
-      installed: !!window.okxwallet,
-    },
+  const ethereum = window.ethereum;
 
-    {
-      id: "metamask",
-      name: "MetaMask",
-      installed: !!window.ethereum?.isMetaMask,
-    },
+  return {
 
-    {
-      id: "trustwallet",
-      name: "Trust Wallet",
-      installed:
-        !!window.trustwallet ||
-        !!window.ethereum?.isTrust,
-    },
+    isOkx:
+      !!ethereum?.isOkxWallet,
 
-  ];
+    isMetaMask:
+      !!ethereum?.isMetaMask,
+
+    isTrust:
+      !!ethereum?.isTrust ||
+      !!ethereum?.isTrustWallet,
+
+    isTokenPocket:
+      !!ethereum?.isTokenPocket,
+
+  };
 
 }

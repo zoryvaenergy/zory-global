@@ -1,5 +1,5 @@
 import { BrowserProvider } from "ethers";
-
+import { getSelectedWallet } from "./storage/getSelectedWallet";
 /**
  * Wallet Service
  * ZORY GLOBAL Web3 Engine v1.0
@@ -12,11 +12,20 @@ export function isWalletInstalled() {
 
 // Provider
 export function getWalletProvider() {
+
   if (!isWalletInstalled()) {
     throw new Error("Wallet not installed");
   }
 
+  const selectedWallet = getSelectedWallet();
+
+  console.log(
+    "Selected Wallet Provider :",
+    selectedWallet
+  );
+
   return new BrowserProvider(window.ethereum);
+
 }
 
 // Current Connected Wallet
@@ -50,18 +59,19 @@ if (!confirmSwitch) {
   return false;
 }
   try {
-
+console.log("Switching to BNB...");
     await window.ethereum.request({
       method: "wallet_switchEthereumChain",
       params: [{ chainId: "0x38" }], // BNB Smart Chain
     });
-
+console.log("BNB Switch Success");
     return true;
 
   }
   catch (error) {
 
   console.error("Switch Network Error :", error);
+alert(error.message);
 
   // Chain Not Added
   if (error.code === 4902) {

@@ -60,9 +60,24 @@ const userData = createUserModel({
 
     return {
   success: true,
+
   userId,
+
   sponsorId: userData.profile.sponsorId,
+
   status: userData.auth.status,
+
+  memberName: userData.profile.name || "",
+
+  walletAddress: userData.wallet.address,
+
+  provider: userData.wallet.provider,
+
+  network: userData.wallet.network,
+
+  chainId: userData.wallet.chainId,
+
+  user: userData,
 };
   } finally {
 

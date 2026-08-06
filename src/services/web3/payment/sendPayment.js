@@ -1,3 +1,4 @@
+import { getCurrentNetwork } from "../walletService";
 import { Contract, parseUnits, formatUnits } from "ethers";
 import { APP_CONFIG } from "../../../config/appConfig";
 import { COMPANY_WALLET } from "./companyWallet";
@@ -10,13 +11,27 @@ import {
 export async function sendPayment() {
 
   console.log("Starting Payment...");
-  await switchNetwork();
+
+const network = await getCurrentNetwork();
+
+if (Number(network.chainId) !== 56) {
+
+  const switched = await switchNetwork();
+
+  if (!switched) {
+    throw new Error(
+      "Please switch to BNB Smart Chain."
+    );
+  }
+
+}
+
 console.log(window.ethereum);
 console.log("isMetaMask:", window.ethereum?.isMetaMask);
 console.log("isOKXWallet:", window.ethereum?.isOKXWallet);
  const signer = await getWalletSigner();
 
-const network = await signer.provider.getNetwork();
+const currentNetwork = await signer.provider.getNetwork();
 
 console.log("Network Name:", network.name);
 console.log("Chain ID:", Number(network.chainId));
