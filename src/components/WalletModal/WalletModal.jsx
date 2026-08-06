@@ -28,6 +28,7 @@ function WalletModal({
 
   
 async function handleWallet(wallet) {
+  alert("handleWallet Started");
   if (!wallet.active) {
     alert(`${wallet.name} will be available soon.`);
     return;
