@@ -11,11 +11,13 @@ export function chooseLaunchStrategy(
   walletId
 ) {
 
-  // Already inside OKX DApp Browser
-  if (browser.isOkx) {
-    return "DIRECT_CONNECT";
-  }
-
+  // Already inside Wallet DApp Browser
+if (
+  browser.isOkx ||
+  browser.isTrust
+) {
+  return "DIRECT_CONNECT";
+}
   // Android Chrome
 if (environment.isAndroid) {
 

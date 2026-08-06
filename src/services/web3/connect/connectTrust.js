@@ -11,7 +11,13 @@ import { switchNetwork } from "../walletService";
 export async function connectTrust() {
 
   try {
+        alert("Ethereum : " + !!window.ethereum);
 
+alert("Providers : " + !!window.ethereum?.providers);
+
+alert("Trust Wallet : " + !!window.trustwallet);
+
+alert(navigator.userAgent);
     if (!window.ethereum) {
 
       return {
