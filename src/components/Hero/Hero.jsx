@@ -4,8 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { joinNow } from "../../services/web3/auth/joinNow";
 import { useState } from "react";
 import WalletModal from "../WalletModal/WalletModal";
+import { detectEnvironment } from "../../services/web3/environment/detectEnvironment";
+import { openTrustApp } from "../../services/web3/launch/openTrustApp";
 
 function Hero() {
+
+  const environment = detectEnvironment();
 
   const navigate = useNavigate();
 
@@ -22,28 +26,43 @@ function Hero() {
 
     if (result.action === "REGISTER") {
 
-     navigate("/register", {
-  state: {
-    wallet: result.wallet,
-  },
-});
+      navigate("/register", {
+        state: {
+          wallet: result.wallet,
+        },
+      });
 
       return;
-
     }
 
     if (result.action === "LOGIN") {
 
       navigate("/dashboard");
-      return;
 
+      return;
+    }
+  }
+
+  // ===============================
+  // Primary Button Handler
+  // ===============================
+  function handlePrimaryButton() {
+
+    // Android Chrome + Wallet not installed
+    if (
+      environment.isAndroid &&
+      !window.ethereum
+    ) {
+      openTrustApp();
+      return;
     }
 
+    // Desktop / Trust Wallet Browser
+    setIsWalletOpen(true);
   }
 
   return (
     <>
-
       <section className="hero">
 
         <div className="hero-bg">
@@ -51,7 +70,7 @@ function Hero() {
           <div className="hero-glow hero-glow-2"></div>
         </div>
 
-        {/* LEFT SIDE */}
+        {/* LEFT */}
         <div className="hero-left">
 
           <div className="hero-badge">
@@ -77,11 +96,16 @@ function Hero() {
           <div className="hero-buttons">
 
             <button
-  className="primary-btn"
-  onClick={() => setIsWalletOpen(true)}
->
-  🔵 Connect Trust Wallet
-</button>
+              className="primary-btn"
+              onClick={handlePrimaryButton}
+            >
+              {
+                environment.isAndroid &&
+                !window.ethereum
+                  ? "📲 Open Trust Wallet"
+                  : "🔵 Connect Trust Wallet"
+              }
+            </button>
 
             <button
               className="secondary-btn"
@@ -110,7 +134,7 @@ function Hero() {
 
         </div>
 
-        {/* RIGHT SIDE */}
+        {/* RIGHT */}
         <div className="hero-right">
           <PlatformPreview />
         </div>
@@ -118,14 +142,13 @@ function Hero() {
       </section>
 
       <WalletModal
-  isOpen={isWalletOpen}
-  onClose={() => setIsWalletOpen(false)}
-  onConnected={handleJoinNow}
-/>
+        isOpen={isWalletOpen}
+        onClose={() => setIsWalletOpen(false)}
+        onConnected={handleJoinNow}
+      />
 
     </>
   );
-
 }
 
 export default Hero;
