@@ -1,8 +1,10 @@
 import { getWalletProvider } from "./walletService";
 
 /**
+ * ==========================================
+ * ZORY GLOBAL
  * Connect Wallet
- * ZORY GLOBAL Web3 Engine
+ * ==========================================
  */
 
 export async function connectWallet() {
@@ -12,22 +14,13 @@ export async function connectWallet() {
     // Wallet Installed?
     if (!window.ethereum) {
 
-      const install = window.confirm(
-        "No Web3 Wallet Found.\n\nInstall OKX Wallet?"
-      );
-
-      if (install) {
-
-        window.location.href =
-  "https://web3.okx.com";
-
-      }
-
       return {
 
         success: false,
 
-        message: "Wallet not installed",
+        action: "INSTALL_TRUST",
+
+        message: "Trust Wallet not found",
 
       };
 
@@ -38,29 +31,20 @@ export async function connectWallet() {
     // Request Permission
     await provider.send("eth_requestAccounts", []);
 
-    const accounts = await provider.send("eth_accounts", []);
-
-    console.log("==================================");
-    console.log("ALL ACCOUNTS :", accounts);
-
     const signer = await provider.getSigner();
 
     const walletAddress = await signer.getAddress();
 
-    console.log("SIGNER ADDRESS :", walletAddress);
-    console.log("==================================");
-
     const network = await provider.getNetwork();
 
     const chainId = Number(network.chainId);
-console.log("CURRENT CHAIN ID :", chainId);
+
     let walletType = "Unknown";
 
-    if (window.ethereum?.isOkxWallet) {
-
-      walletType = "OKX Wallet";
-
-    } else if (window.ethereum?.isTrust) {
+    if (
+      window.ethereum?.isTrust ||
+      window.ethereum?.isTrustWallet
+    ) {
 
       walletType = "Trust Wallet";
 
@@ -68,7 +52,18 @@ console.log("CURRENT CHAIN ID :", chainId);
 
       walletType = "MetaMask";
 
+    } else if (window.ethereum?.isOkxWallet) {
+
+      walletType = "OKX Wallet";
+
     }
+
+    console.log("========== CONNECT WALLET ==========");
+    console.log("Wallet :", walletAddress);
+    console.log("Wallet Type :", walletType);
+    console.log("Network :", network.name);
+    console.log("Chain :", chainId);
+    console.log("====================================");
 
     return {
 
@@ -86,11 +81,13 @@ console.log("CURRENT CHAIN ID :", chainId);
 
   } catch (error) {
 
-    console.error(error);
+    console.error("Connect Wallet Error :", error);
 
     return {
 
       success: false,
+
+      action: "CONNECT_FAILED",
 
       message: error.message,
 

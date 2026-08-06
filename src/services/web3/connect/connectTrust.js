@@ -29,11 +29,19 @@ alert(navigator.userAgent);
 
     const provider = new BrowserProvider(window.ethereum);
 
-    await provider.send("eth_requestAccounts", []);
+alert("STEP 1");
 
-    const signer = await provider.getSigner();
+await provider.send("eth_requestAccounts", []);
 
-    const walletAddress = await signer.getAddress();
+alert("STEP 2");
+
+const signer = await provider.getSigner();
+
+alert("STEP 3");
+
+const walletAddress = await signer.getAddress();
+
+alert("Wallet : " + walletAddress);
 
     const network = await provider.getNetwork();
 if (Number(network.chainId) !== 56) {

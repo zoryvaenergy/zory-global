@@ -26,7 +26,12 @@ export async function launchTrust() {
   console.log("Environment :", environment);
   console.log("Browser :", browser);
   console.log("Strategy :", strategy);
-
+alert(
+  "Environment\n\n" +
+  "Android : " + environment.isAndroid +
+  "\nTrust Browser : " + browser.isTrust +
+  "\nStrategy : " + strategy
+);
   switch (strategy) {
 
     case "DIRECT_CONNECT": {

@@ -6,15 +6,19 @@ import SuccessModal from "../components/auth/SuccessModal/SuccessModal";
 import { useNavigate, useLocation } from "react-router-dom";
 import { savePayment } from "../services/web3/payment/savePayment";
 import { verifyPayment } from "../services/web3/payment/verifyPayment";
-
+import { useSearchParams } from "react-router-dom";
 import { checkWalletExists } from "../services/web3/registration/checkWalletExists";
 
 
 function Register() {
   const navigate = useNavigate();
 const location = useLocation();
+const [searchParams] = useSearchParams();
 
-const wallet = location.state?.wallet;
+const referralFromUrl = searchParams.get("ref");
+const [wallet, setWallet] = useState(
+  location.state?.wallet || null
+);
 
 console.log("Wallet :", wallet);
 
@@ -27,7 +31,9 @@ const [showSuccess, setShowSuccess] = useState(false);
 });
  
   const [sponsorId, setSponsorId] = useState(
-  sessionStorage.getItem("referralId") || ""
+  referralFromUrl ||
+  sessionStorage.getItem("referralId") ||
+  ""
 );
 console.log(
   "Referral From Session:",
@@ -36,7 +42,8 @@ console.log(
 const [loading, setLoading] = useState(false);
 
 
-const [walletAddress] = useState(
+const [walletAddress, setWalletAddress] =
+useState(
   wallet?.walletAddress || ""
 );
 useEffect(() => {
