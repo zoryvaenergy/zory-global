@@ -12,7 +12,7 @@ import { chooseLaunchStrategy } from "../strategy/chooseLaunchStrategy";
 import { openTrustApp } from "../actions/openTrustApp";
 
 export async function launchTrust() {
-alert("launchTrust Started");
+alert("VERSION 8");
   const environment = detectEnvironment();
 
   const browser = detectWalletBrowser();
