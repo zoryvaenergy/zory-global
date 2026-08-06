@@ -75,16 +75,14 @@ if (Number(network.chainId) !== 56) {
 
   } catch (error) {
 
-    console.error(error);
+  console.error("CONNECT ERROR:", error);
 
-    return {
+  return {
+    success: false,
+    message: error.message || String(error),
+    error,
+  };
 
-      success: false,
-
-      message: error.message,
-
-    };
-
-  }
+}
 
 }

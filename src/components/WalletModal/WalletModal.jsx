@@ -37,8 +37,12 @@ function WalletModal({
 
     const result = await launchWallet(wallet.id);
 
-    alert(JSON.stringify(result));
+console.log("LAUNCH RESULT", result);
 
+if (!result.success) {
+  alert(result.message);
+  return;
+}
     console.log(result);
 
     if (result?.success) {
