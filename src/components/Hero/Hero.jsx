@@ -14,7 +14,9 @@ function Hero() {
   const navigate = useNavigate();
 
   const [isWalletOpen, setIsWalletOpen] = useState(false);
+console.log("USER AGENT :", navigator.userAgent);
 
+alert(navigator.userAgent);
   async function handleJoinNow() {
 
     const result = await joinNow();
