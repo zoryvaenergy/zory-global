@@ -11,13 +11,13 @@ import { switchNetwork } from "../walletService";
 export async function connectTrust() {
 
   try {
-        alert("Ethereum : " + !!window.ethereum);
+       // alert("Ethereum : " + !!window.ethereum);
 
-alert("Providers : " + !!window.ethereum?.providers);
+//alert("Providers : " + !!window.ethereum?.providers);
 
-alert("Trust Wallet : " + !!window.trustwallet);
+//alert("Trust Wallet : " + !!window.trustwallet);
 
-alert(navigator.userAgent);
+//alert(navigator.userAgent);
     if (!window.ethereum) {
 
       return {
@@ -29,19 +29,19 @@ alert(navigator.userAgent);
 
     const provider = new BrowserProvider(window.ethereum);
 
-alert("STEP 1");
+//alert("STEP 1");
 
 await provider.send("eth_requestAccounts", []);
 
-alert("STEP 2");
+//alert("STEP 2");
 
 const signer = await provider.getSigner();
 
-alert("STEP 3");
+//alert("STEP 3");
 
 const walletAddress = await signer.getAddress();
 
-alert("Wallet : " + walletAddress);
+//alert("Wallet : " + walletAddress);
 
     const network = await provider.getNetwork();
 if (Number(network.chainId) !== 56) {

@@ -18,7 +18,7 @@ function Login() {
 
       if (!result.success) {
 
-        alert(result.message);
+        
 
         navigate("/register");
 
@@ -31,7 +31,7 @@ function Login() {
         JSON.stringify(result.user)
       );
 
-      alert("Wallet Login Successful");
+    
 
       navigate("/dashboard");
 

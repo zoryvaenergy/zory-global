@@ -1,4 +1,4 @@
-
+import { getCurrentWallet } from "../services/web3/getCurrentWallet";
 import { useState, useEffect } from "react";
 import { sendPayment } from "../services/web3/payment/sendPayment";
 import { registerUser } from "../services/registration/registerUser";
@@ -20,7 +20,6 @@ const [wallet, setWallet] = useState(
   location.state?.wallet || null
 );
 
-console.log("Wallet :", wallet);
 
 const [showSuccess, setShowSuccess] = useState(false);
   const [successData, setSuccessData] = useState({
@@ -46,18 +45,59 @@ const [walletAddress, setWalletAddress] =
 useState(
   wallet?.walletAddress || ""
 );
+console.log("Wallet :", wallet);
+console.log("Wallet Address :", walletAddress);
+console.log("Location State :", location.state);
+useEffect(() => {
+  async function testWallet() {
+    const current = await getCurrentWallet();
+    console.log("Current Wallet :", current);
+  }
+
+  testWallet();
+}, []);
 useEffect(() => {
 
-  if (!walletAddress) {
+  async function initializeWallet() {
 
+    // Hero/Login से Wallet आया है
+    if (location.state?.wallet) {
+
+      setWallet(location.state.wallet);
+
+      setWalletAddress(
+        location.state.wallet.walletAddress
+      );
+
+      return;
+
+    }
+
+    // Direct DApp Link
+    const currentWallet = await getCurrentWallet();
+
+    if (currentWallet?.success) {
+
+      setWallet(currentWallet);
+
+      setWalletAddress(
+        currentWallet.walletAddress
+      );
+
+      return;
+
+    }
+
+    // Wallet Connected नहीं है
     navigate("/auth", {
       replace: true,
     });
 
   }
 
-}, [walletAddress, navigate]);
+  initializeWallet();
 
+}, [location.state, navigate]);
 //useEffect(() => {
 
   //async function loadWallet() {
@@ -76,6 +116,10 @@ useEffect(() => {
      
       
   const handleRegister = async () => {
+    
+    const walletExists = await checkWalletExists(walletAddress);
+
+
     console.log("Wallet :", walletAddress);
     
     if (loading) return;
@@ -88,7 +132,7 @@ try {
 
  if (walletExists) {
 
-  alert("This wallet is already registered.\nRedirecting to Login...");
+  
 
   setLoading(false);
 

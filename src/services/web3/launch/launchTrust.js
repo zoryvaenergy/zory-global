@@ -12,7 +12,7 @@ import { chooseLaunchStrategy } from "../strategy/chooseLaunchStrategy";
 import { openTrustApp } from "../actions/openTrustApp";
 
 export async function launchTrust() {
-alert("VERSION 8");
+
   const environment = detectEnvironment();
 
   const browser = detectWalletBrowser();
@@ -26,12 +26,12 @@ alert("VERSION 8");
   console.log("Environment :", environment);
   console.log("Browser :", browser);
   console.log("Strategy :", strategy);
-alert(
-  "Environment\n\n" +
-  "Android : " + environment.isAndroid +
-  "\nTrust Browser : " + browser.isTrust +
-  "\nStrategy : " + strategy
-);
+//alert(
+ // "Environment\n\n" +
+  //"Android : " + environment.isAndroid +
+  //"\nTrust Browser : " + browser.isTrust +
+  //"\nStrategy : " + strategy
+//);
   switch (strategy) {
 
     case "DIRECT_CONNECT": {
@@ -90,7 +90,7 @@ alert(
 
     case "IOS_DEEPLINK":
 
-      alert("Open Trust Wallet on iPhone");
+      //alert("Open Trust Wallet on iPhone");
 
       return {
         success: false,
