@@ -12,20 +12,7 @@ export async function connectTrust() {
 
   try {
        
-   alert("USER AGENT");
-alert(navigator.userAgent);
-
-alert("CURRENT URL");
-alert(window.location.href);
-
-alert("WINDOW ETHEREUM");
-alert(!!window.ethereum);
-
-alert("isTrust");
-alert(window.ethereum?.isTrust);
-
-alert("isTrustWallet");
-alert(window.ethereum?.isTrustWallet);
+  
 if (!window.ethereum) {
 
       return {

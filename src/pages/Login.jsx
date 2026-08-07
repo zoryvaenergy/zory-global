@@ -18,22 +18,18 @@ function Login() {
 
       if (!result.success) {
 
-        
+  navigate("/register");
 
-        navigate("/register");
+  return;
 
-        return;
+}
 
-      }
+localStorage.setItem(
+  "currentUser",
+  JSON.stringify(result.user)
+);
 
-      localStorage.setItem(
-        "currentUser",
-        JSON.stringify(result.user)
-      );
-
-    
-
-      navigate("/dashboard");
+navigate("/dashboard");
 
     } catch (error) {
 
@@ -132,7 +128,7 @@ function Login() {
           </div>
 
           <button
-            onClick={() => setIsWalletOpen(true)}
+  onClick={handleLogin}
             style={{
               width: "100%",
               padding: "15px",

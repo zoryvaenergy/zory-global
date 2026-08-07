@@ -6,7 +6,7 @@ import { useState } from "react";
 import WalletModal from "../WalletModal/WalletModal";
 import { detectEnvironment } from "../../services/web3/environment/detectEnvironment";
 import { openTrustApp } from "../../services/web3/launch/openTrustApp";
-
+import LoadingOverlay from "../LoadingOverlay/LoadingOverlay";
 function Hero() {
 
   const environment = detectEnvironment();
@@ -14,35 +14,53 @@ function Hero() {
   const navigate = useNavigate();
 
   const [isWalletOpen, setIsWalletOpen] = useState(false);
-console.log("USER AGENT :", navigator.userAgent);
+const [loading, setLoading] = useState(false);
+const [loadingMessage, setLoadingMessage] = useState("");
+  
+async function handleJoinNow() {
 
-alert(navigator.userAgent);
-  async function handleJoinNow() {
+  setLoading(true);
+  setLoadingMessage("🔄 Connecting Wallet...");
 
-    const result = await joinNow();
-
+  const result = await joinNow();
+  await new Promise(resolve =>
+  setTimeout(resolve, 1200)
+);
+  setLoadingMessage("🔍 Verifying Membership...");
     console.log(
       "Join Result :",
       JSON.stringify(result, null, 2)
     );
 
-    if (result.action === "REGISTER") {
+   if (result.action === "REGISTER") {
 
-      navigate("/register", {
-        state: {
-          wallet: result.wallet,
-        },
-      });
+  setLoadingMessage("✨ New Wallet Detected...");
 
-      return;
-    }
+  await new Promise(resolve =>
+    setTimeout(resolve, 500)
+  );
+
+  navigate("/register", {
+    state: {
+      wallet: result.wallet,
+    },
+  });
+
+  return;
+}
 
     if (result.action === "LOGIN") {
 
-      navigate("/dashboard");
+  setLoadingMessage("🚀 Opening Dashboard...");
 
-      return;
-    }
+  await new Promise(resolve =>
+    setTimeout(resolve, 500)
+  );
+
+  navigate("/dashboard");
+
+  return;
+}
   }
 
   // ===============================
@@ -60,7 +78,7 @@ alert(navigator.userAgent);
     }
 
     // Desktop / Trust Wallet Browser
-    setIsWalletOpen(true);
+    handleJoinNow();
   }
 
   return (
@@ -143,11 +161,15 @@ alert(navigator.userAgent);
 
       </section>
 
-      <WalletModal
+    {/*<WalletModal
         isOpen={isWalletOpen}
         onClose={() => setIsWalletOpen(false)}
         onConnected={handleJoinNow}
-      />
+      />*/}
+<LoadingOverlay
+  show={loading}
+  message={loadingMessage}
+/>
 
     </>
   );

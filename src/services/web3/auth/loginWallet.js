@@ -1,3 +1,6 @@
+import { ref, get } from "firebase/database";
+import { database } from "../../../firebase/firebaseConfig";
+
 import { connectWallet } from "../connectWallet";
 import { getCurrentWallet } from "../getCurrentWallet";
 import { checkWallet } from "./checkWallet";
@@ -12,18 +15,28 @@ import { checkWallet } from "./checkWallet";
 export async function loginWallet() {
 
   try {
+    // Current Connected Wallet
+let wallet = await getCurrentWallet();
 
-    // Step 1 : Current Connected Wallet
-    let wallet = await getCurrentWallet();
+console.log("Current Wallet :", wallet);
 
-    // Step 2 : Connect if not connected
-    if (!wallet) {
+// Connect if not connected
+if (!wallet) {
 
-      wallet = await connectWallet();
+  console.log(
+    "Wallet not connected -> Calling connectWallet()"
+  );
 
-    }
+  wallet = await connectWallet();
 
-    // Step 3 : Connection Failed
+} else {
+
+  console.log(
+    "Wallet already connected"
+  );
+
+}
+
     if (!wallet || !wallet.success) {
 
       return {
@@ -34,10 +47,11 @@ export async function loginWallet() {
 
     }
 
-    // Step 4 : Wallet Registered?
-    const userId = await checkWallet(wallet.walletAddress);
+    // Wallet Index
+    const userId = await checkWallet(
+      wallet.walletAddress
+    );
 
-    // New User
     if (!userId) {
 
       return {
@@ -48,12 +62,33 @@ export async function loginWallet() {
 
     }
 
-    // Existing User
+    // Read User
+    const snapshot = await get(
+      ref(database, `users/${userId}`)
+    );
+
+    if (!snapshot.exists()) {
+
+      return {
+        success: false,
+        action: "REGISTER",
+        wallet,
+      };
+
+    }
+
+    const user = snapshot.val();
+
     return {
 
       success: true,
+
       action: "LOGIN",
+
       userId,
+
+      user,
+
       wallet,
 
     };
@@ -65,7 +100,9 @@ export async function loginWallet() {
     return {
 
       success: false,
+
       action: "ERROR",
+
       message: error.message,
 
     };
