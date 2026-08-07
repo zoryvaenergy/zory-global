@@ -11,14 +11,22 @@ import { switchNetwork } from "../walletService";
 export async function connectTrust() {
 
   try {
-       // alert("Ethereum : " + !!window.ethereum);
+       
+   alert("USER AGENT");
+alert(navigator.userAgent);
 
-//alert("Providers : " + !!window.ethereum?.providers);
+alert("CURRENT URL");
+alert(window.location.href);
 
-//alert("Trust Wallet : " + !!window.trustwallet);
+alert("WINDOW ETHEREUM");
+alert(!!window.ethereum);
 
-//alert(navigator.userAgent);
-    if (!window.ethereum) {
+alert("isTrust");
+alert(window.ethereum?.isTrust);
+
+alert("isTrustWallet");
+alert(window.ethereum?.isTrustWallet);
+if (!window.ethereum) {
 
       return {
         success: false,

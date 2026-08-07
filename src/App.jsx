@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-
+import WalletDebug from "./pages/WalletDebug";
 import Profile from "./pages/Profile";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -30,7 +30,10 @@ function App() {
   path="/wallet-setup"
   element={<WalletSetup />}
 />
-
+<Route
+  path="/wallet-debug"
+  element={<WalletDebug />}
+ />
         <Route path="/login" element={<Login />} />
 
         <Route path="/register" element={<Register />} />
