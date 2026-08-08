@@ -1,0 +1,181 @@
+.admin-team {
+  width: 100%;
+  min-height: 100%;
+  padding: 30px;
+  color: #ffffff;
+}
+
+.admin-team-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 25px;
+  color: #ffffff;
+}
+
+.admin-team-card {
+  background: #101935;
+  border: 1px solid #1d2955;
+  border-radius: 16px;
+  padding: 24px;
+  color: #ffffff;
+}
+
+.admin-team-card h3 {
+  margin: 0 0 10px;
+  font-size: 20px;
+}
+
+.admin-team-card p {
+  margin: 0;
+  color: #aeb8d0;
+}
+.admin-team-overview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.admin-team-stat-card {
+  background: #101935;
+  border: 1px solid #1d2955;
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+}
+
+.admin-team-stat-card span {
+  display: block;
+  color: #aeb8d0;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.admin-team-stat-card strong {
+  display: block;
+  color: #ffffff;
+  font-size: 34px;
+  font-weight: 700;
+}
+.admin-team-search {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.admin-team-search input {
+  flex: 1;
+  max-width: 400px;
+  padding: 13px 16px;
+  border: 1px solid #1d2955;
+  border-radius: 10px;
+  background: #101935;
+  color: #ffffff;
+  font-size: 15px;
+  outline: none;
+}
+
+.admin-team-search input::placeholder {
+  color: #8f9ab8;
+}
+
+.admin-team-search input:focus {
+  border-color: #3b5bff;
+}
+
+.admin-team-search button {
+  padding: 13px 24px;
+  border: none;
+  border-radius: 10px;
+  background: #3b5bff;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admin-team-search button:hover {
+  background: #2848d8;
+}
+.admin-team-search-error {
+  margin: -10px 0 20px;
+  color: #ff6b6b;
+  font-size: 14px;
+}
+
+.admin-team-card strong {
+  color: #ffffff;
+}
+/* ==============================
+   DIRECT TEAM TABLE
+============================== */
+
+.admin-team-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+.admin-team-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+}
+
+.admin-team-table th,
+.admin-team-table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.admin-team-table th {
+  background: #0b1230;
+  color: #8fb3ff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.admin-team-table td {
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.admin-team-table tbody tr:hover {
+  background: rgba(59, 91, 255, 0.08);
+}
+
+.admin-team-empty {
+  color: #9aa3c5;
+  text-align: center;
+  padding: 25px 10px;
+}
+/* ==============================
+   LEVEL TEAM
+============================== */
+
+.admin-team-level {
+  margin-top: 25px;
+  background: #0d1535;
+  border-radius: 14px;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.admin-team-level-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.admin-team-level-header h4 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 18px;
+}
+
+.admin-team-level-header span {
+  color: #8fb3ff;
+  font-size: 14px;
+}

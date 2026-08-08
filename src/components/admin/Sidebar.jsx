@@ -14,7 +14,8 @@ import {
 import { FaUsers } from "react-icons/fa";
 import { GiPoolDive } from "react-icons/gi";
 
-function Sidebar() {
+function Sidebar({ activeSection, setActiveSection }) {
+
   return (
     <aside className="sidebar">
 
@@ -25,42 +26,82 @@ function Sidebar() {
 
       <nav className="sidebar-menu">
 
-        <div className="menu-item active">
+        <div
+          className={`menu-item ${
+            activeSection === "dashboard" ? "active" : ""
+          }`}
+          onClick={() => setActiveSection("dashboard")}
+        >
           <MdDashboard />
           <span>Dashboard</span>
         </div>
 
-        <div className="menu-item">
+        <div
+          className={`menu-item ${
+            activeSection === "members" ? "active" : ""
+          }`}
+          onClick={() => setActiveSection("members")}
+        >
           <FaUsers />
           <span>Members</span>
         </div>
 
-        <div className="menu-item">
+        <div
+          className={`menu-item ${
+            activeSection === "team" ? "active" : ""
+          }`}
+          onClick={() => setActiveSection("team")}
+        >
           <MdAccountTree />
           <span>Team</span>
         </div>
 
-        <div className="menu-item">
+        <div
+          className={`menu-item ${
+            activeSection === "pool" ? "active" : ""
+          }`}
+          onClick={() => setActiveSection("pool")}
+        >
           <GiPoolDive />
           <span>Pool</span>
         </div>
 
-        <div className="menu-item">
+        <div
+          className={`menu-item ${
+            activeSection === "income" ? "active" : ""
+          }`}
+          onClick={() => setActiveSection("income")}
+        >
           <MdPeople />
           <span>Income</span>
         </div>
 
-        <div className="menu-item">
+        <div
+          className={`menu-item ${
+            activeSection === "wallet" ? "active" : ""
+          }`}
+          onClick={() => setActiveSection("wallet")}
+        >
           <MdAccountBalanceWallet />
           <span>Wallet</span>
         </div>
 
-        <div className="menu-item">
+        <div
+          className={`menu-item ${
+            activeSection === "debug" ? "active" : ""
+          }`}
+          onClick={() => setActiveSection("debug")}
+        >
           <MdBugReport />
           <span>Debug</span>
         </div>
 
-        <div className="menu-item">
+        <div
+          className={`menu-item ${
+            activeSection === "settings" ? "active" : ""
+          }`}
+          onClick={() => setActiveSection("settings")}
+        >
           <MdSettings />
           <span>Settings</span>
         </div>
@@ -70,11 +111,8 @@ function Sidebar() {
       <div className="sidebar-footer">
 
         <div className="menu-item logout">
-
           <MdLogout />
-
           <span>Logout</span>
-
         </div>
 
       </div>

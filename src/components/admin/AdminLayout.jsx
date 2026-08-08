@@ -1,32 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../styles/admin/adminLayout.css";
+import Members from "./Members";
 import TopBar from "./TopBar";
 import Sidebar from "./Sidebar";
 import DashboardCards from "./DashboardCards";
 import SearchUser from "./SearchUser";
 import DummyUserGenerator from "./DummyUserGenerator";
+import AdminTeam from "./AdminTeam";
 function AdminLayout() {
+
+  const [activeSection, setActiveSection] = useState("dashboard");
+
   return (
-  <div className="admin-layout">
+    <>
+      <TopBar />
 
-    <TopBar />
+      <div className="admin-body">
 
-    <div className="admin-body">
+        <Sidebar
+          activeSection={activeSection}
+          setActiveSection={setActiveSection}
+        />
 
-      <Sidebar />
+        <main className="admin-content">
 
-      <main className="admin-content">
-  <DashboardCards />
+          {activeSection === "dashboard" && (
+            <>
+              <DashboardCards />
+              <SearchUser />
+              <DummyUserGenerator />
+            </>
+          )}
 
-  <SearchUser />
+          {activeSection === "members" && <Members />}
+          {activeSection === "team" && <AdminTeam />}
+        </main>
 
-  <DummyUserGenerator />
-</main>
-
-    </div>
-
-  </div>
-);
+      </div>
+    </>
+  );
 }
 
 export default AdminLayout;

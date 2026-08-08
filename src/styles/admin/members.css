@@ -1,0 +1,144 @@
+.members-page {
+  width: 100%;
+  color: #111827;
+}
+
+.members-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.members-header h2 {
+  margin: 0;
+  font-size: 26px;
+  color: #111827;
+}
+
+.members-header p {
+  margin-top: 6px;
+  color: #6b7280;
+}
+
+.members-header button {
+  border: none;
+  padding: 11px 20px;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.members-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.member-stat-card {
+  background: #fff;
+  padding: 22px;
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  color: #111827;
+}
+
+.member-stat-card span {
+  display: block;
+  color: #6b7280;
+  margin-bottom: 8px;
+}
+
+.member-stat-card strong {
+  font-size: 28px;
+  color: #111827;
+}
+
+.members-search {
+  background: #fff;
+  padding: 18px;
+  border-radius: 14px;
+  margin-bottom: 20px;
+}
+
+.members-search input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+  font-size: 15px;
+   color: #111827;
+  background: #ffffff;
+}
+
+.members-table-card {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.members-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.members-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.members-table th,
+.members-table td {
+  padding: 16px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;
+  color: #111827;
+}
+
+.members-table th {
+  background: #f8fafc;
+  font-size: 14px;
+}
+
+.members-table td {
+  font-size: 14px;
+}
+
+.member-status {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: #f3f4f6;
+  color: #6b7280;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.member-status.active {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.members-loading,
+.members-empty {
+  padding: 30px;
+  text-align: center;
+  color: #6b7280;
+}
+
+@media (max-width: 700px) {
+  .members-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .members-header {
+    align-items: flex-start;
+    gap: 15px;
+  }
+}
