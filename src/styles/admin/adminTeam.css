@@ -179,3 +179,29 @@
   color: #8fb3ff;
   font-size: 14px;
 }
+.wallet-address-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.copy-wallet-btn {
+  border: none;
+  background: #3b5bff;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.copy-wallet-btn:hover {
+  background: #2848d8;
+}
+
+.copy-wallet-btn:active {
+  transform: scale(0.96);
+}

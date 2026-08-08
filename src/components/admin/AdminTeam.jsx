@@ -13,7 +13,7 @@ function AdminTeam() {
 
   const [searchError, setSearchError] = useState("");
   const [loading, setLoading] = useState(false);
-
+const [copiedAddress, setCopiedAddress] = useState("");
   // ==============================
   // SEARCH USER
   // ==============================
@@ -106,7 +106,25 @@ function AdminTeam() {
       setLoading(false);
     }
   };
+// ==============================
+// COPY WALLET ADDRESS
+// ==============================
 
+const handleCopyAddress = async (address) => {
+  if (!address) return;
+
+  try {
+    await navigator.clipboard.writeText(address);
+
+    setCopiedAddress(address);
+
+    setTimeout(() => {
+      setCopiedAddress("");
+    }, 1500);
+  } catch (error) {
+    console.error("Wallet Address Copy Error:", error);
+  }
+};
   // ==============================
   // USER TEAM DATA
   // ==============================
@@ -123,7 +141,7 @@ function AdminTeam() {
   const actualLevelTeam =
     levelTeam.length;
 
-    
+
 const levelGroups = {};
 
 levelTeam.forEach((user) => {
@@ -338,8 +356,29 @@ levelTeam.forEach((user) => {
   </td>
 
   <td>
-    {user.wallet?.address || "-"}
-  </td>
+  {user.wallet?.address ? (
+    <div className="wallet-address-cell">
+      <span>
+        {user.wallet.address.slice(0, 10)}...
+        {user.wallet.address.slice(-6)}
+      </span>
+
+      <button
+        type="button"
+        className="copy-wallet-btn"
+        onClick={() =>
+          handleCopyAddress(user.wallet.address)
+        }
+      >
+        {copiedAddress === user.wallet.address
+          ? "Copied"
+          : "Copy"}
+      </button>
+    </div>
+  ) : (
+    "-"
+  )}
+</td>
 
   <td>
     {user.profile?.sponsorId || "-"}
@@ -427,8 +466,29 @@ levelTeam.forEach((user) => {
                     </td>
 
                     <td>
-                      {user.wallet?.address || "-"}
-                    </td>
+  {user.wallet?.address ? (
+    <div className="wallet-address-cell">
+      <span>
+        {user.wallet.address.slice(0, 10)}...
+        {user.wallet.address.slice(-6)}
+      </span>
+
+      <button
+        type="button"
+        className="copy-wallet-btn"
+        onClick={() =>
+          handleCopyAddress(user.wallet.address)
+        }
+      >
+        {copiedAddress === user.wallet.address
+          ? "Copied"
+          : "Copy"}
+      </button>
+    </div>
+  ) : (
+    "-"
+  )}
+</td>
 
                     <td>
                       {user.profile?.sponsorId || "-"}
