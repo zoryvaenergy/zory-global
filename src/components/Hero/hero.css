@@ -170,16 +170,42 @@ transparent 35%
     bottom:-80px;
 
 }
-.hero-buttons{
-
-    display:flex;
-
-    gap:18px;
-
-    margin-top:36px;
-
+.hero-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  max-width: 455px;
+}
+/* Home Hero Buttons */
+.hero-buttons .primary-btn {
+  background: #2563eb;
+  color: #ffffff;
+  border: 1px solid #2563eb;
 }
 
+.hero-buttons .secondary-btn {
+  background: #17213d;
+  color: #ffffff;
+  border: 1px solid #2d3b6b;
+}
+
+/* Download button */
+.hero-buttons .download-wallet-btn {
+  width: 100%;
+  padding: 15px;
+  border-radius: 10px;
+  background: #0f172a;
+  color: #60a5fa;
+  border: 1px solid #2563eb;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  box-sizing: border-box;
+}
+.hero-buttons .download-wallet-btn:hover {
+  background: #172554;
+}
 .primary-btn{
 
     padding:16px 34px;
@@ -275,4 +301,447 @@ transparent 35%
 
     transform:translateY(-2px);
 
+}
+.hero-token {
+  width: 240px;
+  height: 240px;
+  margin: 0 auto 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-token img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  filter: drop-shadow(0 0 25px rgba(245, 158, 11, 0.45));
+}
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.hero-token {
+  width: 220px;
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-token img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  filter: drop-shadow(0 0 28px rgba(245, 158, 11, 0.5));
+}
+
+.hero-platform {
+  width: 100%;
+}
+.hero-token-info {
+  width: 100%;
+  max-width: 360px;
+  padding: 18px;
+  box-sizing: border-box;
+  border-radius: 18px;
+  background: rgba(16, 25, 53, 0.88);
+  border: 1px solid rgba(96, 165, 250, 0.28);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(12px);
+  text-align: center;
+}
+
+.token-info-title {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+}
+
+.token-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.token-info-grid div {
+  padding: 10px 6px;
+  border-radius: 10px;
+  background: rgba(37, 99, 235, 0.08);
+  border: 1px solid rgba(96, 165, 250, 0.15);
+}
+
+.token-info-grid span {
+  display: block;
+  color: #94a3b8;
+  font-size: 11px;
+  margin-bottom: 5px;
+}
+
+.token-info-grid strong {
+  display: block;
+  color: #ffffff;
+  font-size: 13px;
+}
+
+.tokenomics-btn {
+  width: 100%;
+  margin-top: 14px;
+  padding: 11px 16px;
+  border: 1px solid #2563eb;
+  border-radius: 10px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.tokenomics-btn:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+/* =========================================
+   ZORY TOKEN SHOWCASE
+========================================= */
+
+.token-showcase {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.token-image-wrap {
+  width: 330px;
+  height: 330px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+
+  animation: float 5s ease-in-out infinite;
+}
+
+.token-image-wrap::before {
+  content: "";
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: rgba(245, 158, 11, 0.16);
+  filter: blur(45px);
+  z-index: 0;
+}
+
+.zory-token-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+  border-radius: 20px;
+  filter: drop-shadow(0 0 25px rgba(245, 158, 11, 0.45));
+  transition: transform 0.4s ease;
+}
+
+.zory-token-image:hover {
+  transform: scale(1.03);
+}
+.token-coming-soon {
+  display: block;
+
+  width: fit-content;
+
+  margin: -5px auto 15px;
+  padding: 5px 14px;
+
+  border-radius: 50px;
+
+  background: rgba(245, 158, 11, 0.10);
+
+  border: 1px solid rgba(245, 190, 60, 0.35);
+
+  color: #facc15;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+
+  animation: comingSoonPulse 2s ease-in-out infinite;
+}
+
+@keyframes comingSoonPulse {
+  0%,
+  100% {
+    opacity: 0.65;
+
+    box-shadow:
+      0 0 5px rgba(250, 204, 21, 0.10);
+  }
+
+  50% {
+    opacity: 1;
+
+    box-shadow:
+      0 0 16px rgba(250, 204, 21, 0.35);
+  }
+}
+
+/* =========================================
+   TOKEN INFORMATION CARD
+========================================= */
+
+.token-info-card {
+  position: relative;
+
+  width: 100%;
+  max-width: 405px;
+
+  padding: 20px;
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(20, 32, 70, 0.97),
+      rgba(8, 18, 45, 0.98)
+    );
+
+  border: 1px solid rgba(255, 190, 60, 0.45);
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.30),
+    0 0 25px rgba(255, 190, 60, 0.08),
+    inset 0 0 25px rgba(255, 190, 60, 0.025);
+
+  backdrop-filter: blur(10px);
+
+  overflow: hidden;
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.token-info-card::before {
+  content: "";
+
+  position: absolute;
+
+  width: 180px;
+  height: 180px;
+
+  top: -100px;
+  right: -80px;
+
+  background: radial-gradient(
+    circle,
+    rgba(255, 190, 60, 0.18),
+    transparent 70%
+  );
+
+  pointer-events: none;
+}
+.token-info-card:hover {
+  transform: translateY(-3px);
+
+  border-color: rgba(255, 200, 80, 0.75);
+
+  box-shadow:
+    0 14px 35px rgba(0, 0, 0, 0.35),
+    0 0 35px rgba(255, 190, 60, 0.15),
+    inset 0 0 30px rgba(255, 190, 60, 0.04);
+}
+
+.token-info-card h3 {
+  margin: 0 0 15px;
+  text-align: center;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.token-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.token-info-item {
+  padding: 11px 8px;
+  text-align: center;
+  border-radius: 11px;
+
+  background: rgba(22, 34, 72, 0.92);
+
+  border: 1px solid rgba(255, 190, 60, 0.18);
+
+  box-shadow:
+    inset 0 0 12px rgba(255, 190, 60, 0.025);
+
+  transition:
+    border-color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.token-info-item:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(255, 190, 60, 0.45);
+
+  box-shadow:
+    0 0 15px rgba(255, 190, 60, 0.08),
+    inset 0 0 12px rgba(255, 190, 60, 0.04);
+}
+.token-info-item span {
+  display: block;
+  margin-bottom: 5px;
+  color: #aab4c5;
+  font-size: 11px;
+  letter-spacing: 0.3px;
+}
+
+.token-info-item strong {
+  display: block;
+  color: #ffffff;
+  font-size: 13px;
+}
+
+
+/* =========================================
+   TOKENOMICS BUTTON
+========================================= */
+/* =========================================
+   GOLD TOKENOMICS BUTTON
+========================================= */
+
+.tokenomics-btn {
+  width: 100%;
+  margin-top: 14px;
+  padding: 12px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: linear-gradient(
+    135deg,
+    #f59e0b,
+    #facc15
+  );
+
+  color: #111827;
+
+  cursor: pointer;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  box-shadow:
+    0 6px 18px rgba(245, 158, 11, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    filter 0.3s ease;
+}
+
+.tokenomics-btn:hover {
+  background: linear-gradient(
+    135deg,
+    #facc15,
+    #fbbf24
+  );
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 25px rgba(245, 158, 11, 0.35),
+    0 0 18px rgba(250, 204, 21, 0.20);
+
+  filter: brightness(1.05);
+}
+
+/* =========================================
+   MOBILE HERO
+========================================= */
+
+@media (max-width: 768px) {
+
+  .hero-right {
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  .token-showcase {
+    width: 100%;
+    gap: 15px;
+  }
+
+  .token-image-wrap {
+    width: 260px;
+    height: 260px;
+  }
+
+  .token-info-card {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .token-info-grid {
+    gap: 8px;
+  }
+
+  .token-info-item {
+    padding: 10px 5px;
+  }
+
+  .token-info-item span {
+    font-size: 10px;
+  }
+
+  .token-info-item strong {
+    font-size: 12px;
+  }
+
+  .token-info-card h3 {
+    font-size: 18px;
+  }
+
+}
+.token-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.token-title img {
+  width: 34px;
+  height: 34px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(255, 190, 50, 0.55);
+}
+
+.token-title span {
+  font-weight: 800;
 }

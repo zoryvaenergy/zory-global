@@ -7,6 +7,7 @@ import WalletModal from "../WalletModal/WalletModal";
 import { detectEnvironment } from "../../services/web3/environment/detectEnvironment";
 import { openTrustApp } from "../../services/web3/launch/openTrustApp";
 import LoadingOverlay from "../LoadingOverlay/LoadingOverlay";
+import zoryToken from "../../assets/zorytoken.png";
 function Hero() {
 
   const environment = detectEnvironment();
@@ -133,7 +134,17 @@ async function handleJoinNow() {
             >
               📱 New User? Setup Wallet
             </button>
-
+<button
+  className="download-wallet-btn"
+  onClick={() =>
+    window.open(
+      "https://trustwallet.com/download",
+      "_blank"
+    )
+  }
+>
+  📲 Download Trust Wallet
+</button>
           </div>
 
           <div className="hero-features">
@@ -154,12 +165,65 @@ async function handleJoinNow() {
 
         </div>
 
-        {/* RIGHT */}
-        <div className="hero-right">
-          <PlatformPreview />
+       {/* RIGHT */}
+<div className="hero-right">
+
+  {/* ZORY TOKEN SHOWCASE */}
+  <div className="token-showcase">
+
+    <div className="token-image-wrap">
+      <img
+        src={zoryToken}
+        alt="ZORY Token"
+        className="zory-token-image"
+      />
+    </div>
+
+    <div className="token-info-card">
+
+      <h3 className="token-title">
+  <img src={zoryToken} alt="ZORY Token" />
+  <span>ZORY TOKEN</span>
+</h3>
+<div className="token-coming-soon">
+  ✨ COMING SOON
+</div>
+      <div className="token-info-grid">
+
+        <div className="token-info-item">
+          <span>Symbol</span>
+          <strong>ZORY</strong>
         </div>
 
-      </section>
+        <div className="token-info-item">
+          <span>Network</span>
+          <strong>BNB Chain</strong>
+        </div>
+
+        <div className="token-info-item">
+          <span>Total Supply</span>
+          <strong>1 Billion</strong>
+        </div>
+
+      </div>
+
+      <button
+        className="tokenomics-btn"
+        onClick={() => navigate("/#tokenomics")}
+      >
+        View Tokenomics →
+      </button>
+
+    </div>
+
+  </div>
+
+  {/* PLATFORM PREVIEW */}
+  <PlatformPreview />
+
+</div>
+
+</section>
 
     {/*<WalletModal
         isOpen={isWalletOpen}
