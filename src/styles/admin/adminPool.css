@@ -1,0 +1,606 @@
+.admin-pool {
+  padding: 5px;
+  color: #111827;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.admin-pool-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 25px;
+  margin-bottom: 28px;
+}
+
+.admin-pool-label {
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.admin-pool-header h1 {
+  margin: 8px 0 5px;
+  font-size: 34px;
+  font-weight: 800;
+}
+
+.admin-pool-header p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 15px;
+}
+
+.pool-status {
+  padding: 10px 18px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.pool-status.active {
+  color: #2563eb;
+  background: rgba(37, 99, 235, 0.1);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+}
+
+.pool-status.completed {
+  color: #16a34a;
+  background: rgba(22, 163, 74, 0.1);
+  border: 1px solid rgba(22, 163, 74, 0.2);
+}
+
+
+/* =========================
+   SUMMARY
+========================= */
+
+.pool-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.pool-summary-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  box-shadow: 0 5px 18px rgba(15, 23, 42, 0.05);
+}
+
+.pool-card-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: #2563eb;
+  font-size: 22px;
+}
+
+.pool-summary-card span:not(.pool-card-icon) {
+  display: block;
+  color: #6b7280;
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.pool-summary-card strong {
+  display: block;
+  color: #111827;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+
+/* =========================
+   COMMON CARD
+========================= */
+
+.pool-progress-card,
+.pool-steps-card,
+.pool-config-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 25px;
+  margin-bottom: 22px;
+  box-shadow: 0 5px 18px rgba(15, 23, 42, 0.05);
+}
+
+.pool-section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 22px;
+}
+
+.pool-section-title span {
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.pool-section-title h2 {
+  margin: 5px 0 0;
+  font-size: 22px;
+  color: #111827;
+}
+
+.pool-section-title > strong {
+  color: #2563eb;
+  font-size: 28px;
+}
+
+
+/* =========================
+   PROGRESS
+========================= */
+
+.pool-progress {
+  width: 100%;
+  height: 12px;
+  background: #e5e7eb;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.pool-progress-fill {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    #2563eb,
+    #4f8cff
+  );
+  border-radius: 20px;
+  transition: width 0.5s ease;
+}
+
+.pool-progress-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+
+/* =========================
+   STEPS
+========================= */
+
+.pool-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.pool-step {
+  position: relative;
+  padding: 18px;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  background: #f9fafb;
+  transition: 0.25s ease;
+}
+
+.pool-step.active {
+  border-color: #2563eb;
+  background: rgba(37, 99, 235, 0.05);
+}
+
+.pool-step.completed {
+  border-color: #16a34a;
+  background: rgba(22, 163, 74, 0.05);
+}
+
+.step-number {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  border-radius: 10px;
+  background: #e8eefc;
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.pool-step.completed .step-number {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.step-content h3 {
+  margin: 0 0 5px;
+  color: #111827;
+  font-size: 17px;
+}
+
+.step-content p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.pool-step > strong {
+  display: block;
+  margin-top: 15px;
+  color: #2563eb;
+  font-size: 20px;
+}
+
+
+/* =========================
+   CONFIG
+========================= */
+
+.pool-config-card {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.pool-config-card > div {
+  padding: 18px;
+  background: #f9fafb;
+  border-radius: 12px;
+}
+
+.pool-config-card span {
+  display: block;
+  margin-bottom: 7px;
+  color: #6b7280;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.pool-config-card strong {
+  color: #111827;
+  font-size: 20px;
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+.pool-loading {
+  padding: 80px 20px;
+  text-align: center;
+  color: #6b7280;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1000px) {
+
+  .pool-summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pool-steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pool-config-card {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+  .admin-pool-header {
+    flex-direction: column;
+  }
+
+  .pool-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pool-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .pool-config-card {
+    grid-template-columns: 1fr;
+  }
+
+  .pool-progress-info {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+}
+/* =========================
+   USER POOL SEARCH
+========================= */
+
+.pool-search-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 25px;
+  margin-bottom: 22px;
+  box-shadow: 0 5px 18px rgba(15, 23, 42, 0.05);
+}
+
+.pool-search-box {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.pool-search-box input {
+  flex: 1;
+  height: 48px;
+  padding: 0 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  outline: none;
+  font-size: 15px;
+  color: #111827;
+  box-sizing: border-box;
+}
+
+.pool-search-box input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.pool-search-box button {
+  min-width: 110px;
+  height: 48px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 10px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.pool-search-box button:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.pool-search-box button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.pool-search-error {
+  margin: 12px 0 0;
+  color: #dc2626;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+/* =========================
+   USER POOL DETAILS
+========================= */
+
+.pool-user-details {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 25px;
+  margin-bottom: 22px;
+  box-shadow: 0 5px 18px rgba(15, 23, 42, 0.05);
+}
+
+.pool-user-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.pool-user-header span {
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.pool-user-header h2 {
+  margin: 6px 0 0;
+  color: #111827;
+  font-size: 26px;
+}
+
+.pool-user-status {
+  padding: 9px 16px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.pool-user-status.active {
+  color: #2563eb;
+  background: rgba(37, 99, 235, 0.1);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+}
+
+.pool-user-status.completed {
+  color: #16a34a;
+  background: rgba(22, 163, 74, 0.1);
+  border: 1px solid rgba(22, 163, 74, 0.2);
+}
+
+
+/* =========================
+   USER POOL GRID
+========================= */
+
+.pool-user-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.pool-user-grid > div {
+  padding: 17px;
+  background: #f9fafb;
+  border: 1px solid #eef0f3;
+  border-radius: 12px;
+}
+
+.pool-user-grid span,
+.pool-user-meta span {
+  display: block;
+  color: #6b7280;
+  font-size: 12px;
+  margin-bottom: 7px;
+}
+
+.pool-user-grid strong,
+.pool-user-meta strong {
+  display: block;
+  color: #111827;
+  font-size: 19px;
+}
+
+
+/* =========================
+   USER POOL META
+========================= */
+
+.pool-user-meta {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.pool-user-meta > div {
+  padding: 15px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #eef0f3;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 800px) {
+
+  .pool-user-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pool-user-meta {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+@media (max-width: 550px) {
+
+  .pool-search-box {
+    flex-direction: column;
+  }
+
+  .pool-search-box button {
+    width: 100%;
+  }
+
+  .pool-user-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .pool-user-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pool-user-meta {
+    grid-template-columns: 1fr;
+  }
+
+}
+/* =========================================
+   POOL 1 FINANCIAL & UPGRADE
+========================================= */
+
+.pool-financial-card {
+  margin-top: 24px;
+  padding: 28px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+}
+
+.pool-financial-card .section-label {
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.pool-financial-card h3 {
+  margin: 0 0 22px;
+  font-size: 24px;
+  color: #111827;
+}
+
+.pool-financial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.financial-item {
+  padding: 18px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+}
+
+.financial-item span {
+  display: block;
+  color: #64748b;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.financial-item strong {
+  display: block;
+  color: #111827;
+  font-size: 20px;
+}

@@ -7,6 +7,7 @@ import DashboardCards from "./DashboardCards";
 import SearchUser from "./SearchUser";
 import DummyUserGenerator from "./DummyUserGenerator";
 import AdminTeam from "./AdminTeam";
+import AdminPool from "./AdminPool";
 function AdminLayout() {
 
   const [activeSection, setActiveSection] = useState("dashboard");
@@ -34,6 +35,7 @@ function AdminLayout() {
 
           {activeSection === "members" && <Members />}
           {activeSection === "team" && <AdminTeam />}
+          {activeSection === "pool" && <AdminPool />}
         </main>
 
       </div>
