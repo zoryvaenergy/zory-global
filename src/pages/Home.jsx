@@ -9,7 +9,7 @@ import Roadmap from "../components/Roadmap/Roadmap";
 import Header from "../components/Header/Header";
 import Hero from "../components/Hero/Hero";
 import Stats from "../components/Stats/Stats";
-
+import NFTComingSoon from "../components/NFT/NFTComingSoon";
 function Home() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -36,6 +36,7 @@ function Home() {
 <HowItWorks />
 <Roadmap />
 <Tokenomics />
+<NFTComingSoon />
 <About />
 <Footer />
     </div>
