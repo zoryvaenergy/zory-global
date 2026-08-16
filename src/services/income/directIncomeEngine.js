@@ -50,23 +50,23 @@ export async function directIncomeEngine(userId) {
 
   console.log("STEP A : updateWallet");
 
-  await updateWallet(sponsorId, "direct", 2);
+  await updateWallet(sponsorId, "direct", 5);
 
   console.log("STEP B : updateIncome");
 
-  await updateIncome(sponsorId, "direct", 2);
+  await updateIncome(sponsorId, "direct", 5);
 
   console.log("STEP C : saveHistory");
 
   await saveIncomeHistory({
     userId: sponsorId,
     type: "direct",
-    amount: 2,
+    amount: 5,
     fromUserId: userId,
     remark: "Direct Referral Income",
   });
 
   console.log("STEP D : Finished");
 
-  console.log(`✅ Direct Income +2 given to ${sponsorId}`);
+  console.log(`✅ Direct Income +5 given to ${sponsorId}`);
 }

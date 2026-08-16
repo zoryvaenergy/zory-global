@@ -15,7 +15,7 @@ import Web3Test from "./pages/Web3Test";
 import Web3Auth from "./pages/Web3Auth";
 import WalletSetup from "./pages/WalletSetup";
 import WalletListener from "./services/web3/session/WalletListener";
-
+import LaunchComingSoon from "./pages/LaunchComingSoon";
 function App() {
   return (
     <>
@@ -23,7 +23,10 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-
+<Route
+  path="/launch"
+  element={<LaunchComingSoon />}
+/>
         <Route path="/auth" element={<Web3Auth />} />
 
 <Route

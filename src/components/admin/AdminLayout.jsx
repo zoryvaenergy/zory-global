@@ -8,6 +8,8 @@ import SearchUser from "./SearchUser";
 import DummyUserGenerator from "./DummyUserGenerator";
 import AdminTeam from "./AdminTeam";
 import AdminPool from "./AdminPool";
+import AdminIncome from "./AdminIncome";
+import AdminWallet from "./AdminWallet";
 function AdminLayout() {
 
   const [activeSection, setActiveSection] = useState("dashboard");
@@ -26,16 +28,21 @@ function AdminLayout() {
         <main className="admin-content">
 
           {activeSection === "dashboard" && (
-            <>
-              <DashboardCards />
-              <SearchUser />
-              <DummyUserGenerator />
-            </>
-          )}
+  <>
+    <DashboardCards />
+    <DummyUserGenerator />
+  </>
+)}
+
+{activeSection === "debug" && (
+  <SearchUser />
+)}
 
           {activeSection === "members" && <Members />}
           {activeSection === "team" && <AdminTeam />}
           {activeSection === "pool" && <AdminPool />}
+          {activeSection === "income" && <AdminIncome />}
+          {activeSection === "wallet" && <AdminWallet />}
         </main>
 
       </div>

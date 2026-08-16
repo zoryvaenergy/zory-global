@@ -1,0 +1,413 @@
+/* =========================
+   ADMIN INCOME
+========================= */
+
+.admin-income {
+  padding: 5px;
+  color: #111827;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.admin-income-header {
+  margin-bottom: 28px;
+}
+
+.admin-income-label {
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.admin-income-header h1 {
+  margin: 8px 0 5px;
+  font-size: 34px;
+  font-weight: 800;
+}
+
+.admin-income-header p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 15px;
+}
+
+
+/* =========================
+   SEARCH CARD
+========================= */
+
+.income-search-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 25px;
+  margin-bottom: 22px;
+  box-shadow: 0 5px 18px rgba(15, 23, 42, 0.05);
+}
+
+.income-section-title {
+  margin-bottom: 20px;
+}
+
+.income-section-title span {
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.income-section-title h2 {
+  margin: 5px 0 0;
+  font-size: 22px;
+  color: #111827;
+}
+
+.income-search-box {
+  display: flex;
+  gap: 12px;
+}
+
+.income-search-box input {
+  flex: 1;
+  height: 48px;
+  padding: 0 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  outline: none;
+  font-size: 15px;
+  color: #111827;
+  box-sizing: border-box;
+}
+
+.income-search-box input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.income-search-box button {
+  min-width: 110px;
+  height: 48px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 10px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.income-search-box button:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.income-search-box button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.income-search-error {
+  margin: 12px 0 0;
+  color: #dc2626;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+/* =========================
+   INCOME SUMMARY
+========================= */
+
+.income-summary-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 25px;
+  box-shadow: 0 5px 18px rgba(15, 23, 42, 0.05);
+}
+
+.income-user-header {
+  padding-bottom: 20px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.income-user-header span {
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.income-user-header h2 {
+  margin: 6px 0 0;
+  color: #111827;
+  font-size: 26px;
+}
+
+.income-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.income-summary-item {
+  padding: 20px;
+  background: #f9fafb;
+  border: 1px solid #eef0f3;
+  border-radius: 14px;
+}
+
+.income-summary-item span {
+  display: block;
+  color: #6b7280;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.income-summary-item strong {
+  display: block;
+  color: #111827;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.income-summary-item.total {
+  background: rgba(37, 99, 235, 0.06);
+  border-color: rgba(37, 99, 235, 0.18);
+}
+
+.income-summary-item.total strong {
+  color: #2563eb;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+  .income-summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+  .income-search-box {
+    flex-direction: column;
+  }
+
+  .income-search-box button {
+    width: 100%;
+  }
+
+  .income-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+/* =========================
+   INCOME HISTORY
+========================= */
+
+.income-history-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 25px;
+  margin-top: 22px;
+  box-shadow: 0 5px 18px rgba(15, 23, 42, 0.05);
+}
+
+.income-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.income-history-row {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 0.8fr 0.8fr;
+  align-items: center;
+  gap: 20px;
+
+  padding: 16px 18px;
+
+  background: #f9fafb;
+  border: 1px solid #eef0f3;
+  border-radius: 12px;
+
+  transition: 0.2s ease;
+}
+
+.income-history-row:hover {
+  border-color: rgba(37, 99, 235, 0.25);
+  transform: translateY(-1px);
+}
+
+.history-type {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.history-type strong {
+  color: #111827;
+  font-size: 14px;
+}
+
+.history-type span {
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.history-from {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.history-from span {
+  color: #9ca3af;
+  font-size: 11px;
+}
+
+.history-from strong {
+  color: #374151;
+  font-size: 13px;
+}
+
+.history-amount strong {
+  color: #2563eb;
+  font-size: 16px;
+}
+
+.history-status span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 6px 10px;
+
+  border-radius: 20px;
+
+  background: rgba(22, 163, 74, 0.1);
+  color: #15803d;
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+
+/* =========================
+   EMPTY HISTORY
+========================= */
+
+.income-empty {
+  padding: 35px 20px;
+  text-align: center;
+
+  color: #6b7280;
+  font-size: 14px;
+
+  background: #f9fafb;
+  border-radius: 12px;
+}
+
+
+/* =========================
+   MOBILE HISTORY
+========================= */
+
+@media (max-width: 700px) {
+
+  .income-history-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .history-amount {
+    text-align: left;
+  }
+
+  .history-status {
+    text-align: left;
+  }
+
+}
+/* =========================
+   INCOME VERIFICATION
+========================= */
+
+.income-verification-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 25px;
+  margin-top: 22px;
+  box-shadow: 0 5px 18px rgba(15, 23, 42, 0.05);
+}
+
+.income-verification-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.verification-item {
+  padding: 18px;
+  background: #f9fafb;
+  border: 1px solid #eef0f3;
+  border-radius: 14px;
+}
+
+.verification-item span {
+  display: block;
+  color: #6b7280;
+  font-size: 13px;
+  margin-bottom: 7px;
+}
+
+.verification-item strong {
+  display: block;
+  color: #111827;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.verification-status {
+  background: rgba(22, 163, 74, 0.06);
+  border-color: rgba(22, 163, 74, 0.2);
+}
+
+.verification-status strong {
+  color: #15803d;
+  font-size: 16px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+  .income-verification-grid {
+    grid-template-columns: 1fr;
+  }
+
+}

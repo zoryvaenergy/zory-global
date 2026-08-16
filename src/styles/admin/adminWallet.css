@@ -1,0 +1,361 @@
+/* =========================
+   ADMIN WALLET
+========================= */
+
+.admin-wallet {
+  padding: 5px;
+  color: #111827;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.admin-wallet-header {
+  margin-bottom: 28px;
+}
+
+.admin-wallet-label {
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.admin-wallet-header h1 {
+  margin: 8px 0 5px;
+  font-size: 34px;
+  font-weight: 800;
+}
+
+.admin-wallet-header p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 15px;
+}
+
+
+/* =========================
+   SEARCH CARD
+========================= */
+
+.wallet-search-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 25px;
+  margin-bottom: 22px;
+  box-shadow: 0 5px 18px rgba(15, 23, 42, 0.05);
+}
+
+.wallet-section-title {
+  margin-bottom: 20px;
+}
+
+.wallet-section-title span {
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.wallet-section-title h2 {
+  margin: 5px 0 0;
+  font-size: 22px;
+  color: #111827;
+}
+
+.wallet-search-box {
+  display: flex;
+  gap: 12px;
+}
+
+.wallet-search-box input {
+  flex: 1;
+  height: 48px;
+  padding: 0 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  outline: none;
+  font-size: 15px;
+  color: #111827;
+  box-sizing: border-box;
+}
+
+.wallet-search-box input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.wallet-search-box button {
+  min-width: 110px;
+  height: 48px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 10px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.wallet-search-box button:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.wallet-search-box button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.wallet-search-error {
+  margin: 12px 0 0;
+  color: #dc2626;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+/* =========================
+   WALLET SUMMARY
+========================= */
+
+.wallet-summary-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 25px;
+  box-shadow: 0 5px 18px rgba(15, 23, 42, 0.05);
+}
+
+.wallet-user-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  padding-bottom: 20px;
+  margin-bottom: 22px;
+
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.wallet-user-header span {
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.wallet-user-header h2 {
+  margin: 6px 0 0;
+  color: #111827;
+  font-size: 26px;
+}
+
+.wallet-status {
+  padding: 9px 16px;
+  border-radius: 22px;
+
+  background: rgba(37, 99, 235, 0.08);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+
+/* =========================
+   WALLET GRID
+========================= */
+
+.wallet-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.wallet-summary-item {
+  padding: 20px;
+
+  background: #f9fafb;
+  border: 1px solid #eef0f3;
+  border-radius: 14px;
+}
+
+.wallet-summary-item span {
+  display: block;
+  color: #6b7280;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.wallet-summary-item strong {
+  display: block;
+  color: #111827;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+
+/* =========================
+   INCOME SECTION
+========================= */
+
+.wallet-income-section {
+  margin-top: 28px;
+  padding-top: 25px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.wallet-income-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.wallet-income-item {
+  padding: 18px;
+
+  background: #f9fafb;
+  border: 1px solid #eef0f3;
+  border-radius: 14px;
+}
+
+.wallet-income-item span {
+  display: block;
+  color: #6b7280;
+  font-size: 13px;
+  margin-bottom: 7px;
+}
+
+.wallet-income-item strong {
+  display: block;
+  color: #2563eb;
+  font-size: 21px;
+  font-weight: 800;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+  .wallet-summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+  .wallet-search-box {
+    flex-direction: column;
+  }
+
+  .wallet-search-box button {
+    width: 100%;
+  }
+
+  .wallet-user-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .wallet-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wallet-income-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+/* =========================================
+   WALLET VERIFICATION
+========================================= */
+
+.wallet-verification-section {
+  margin-top: 28px;
+  padding-top: 28px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.wallet-verification-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.wallet-verification-item {
+  padding: 18px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wallet-verification-item span {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.wallet-verification-item strong {
+  font-size: 20px;
+  color: #111827;
+}
+
+.wallet-verification-item.verification-success {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.wallet-verification-item.verification-success strong {
+  color: #15803d;
+}
+
+.wallet-verification-item.verification-warning {
+  background: #fffbeb;
+  border-color: #fde68a;
+}
+
+.wallet-verification-item.verification-warning strong {
+  color: #b45309;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+
+  .wallet-verification-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .wallet-verification-grid {
+    grid-template-columns: 1fr;
+  }
+
+}

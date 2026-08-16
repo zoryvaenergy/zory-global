@@ -5,87 +5,170 @@ import { verifyDirectCount } from "../../services/team/verifyDirectCount";
 import { verifyTotalTeam } from "../../services/team/verifyTotalTeam";
 import UserDebugCard from "./UserDebugCard";
 import VerifyPanel from "./VerifyPanel";
+
 function SearchUser() {
 
   const [userId, setUserId] = useState("");
 
- const handleSearch = async () => {
+  const [userData, setUserData] =
+    useState(null);
 
-  if (!userId.trim()) {
+  const [actualDirect, setActualDirect] =
+    useState(0);
 
-    setError("Please enter User ID");
+  const [actualTotalTeam, setActualTotalTeam] =
+    useState(0);
 
-    setUserData(null);
+  const [error, setError] =
+    useState("");
 
-    return;
+  // ==========================
+  // SEARCH USER
+  // ==========================
 
-  }
+  const handleSearch = async () => {
 
-  const user = await getUserDetails(userId.trim());
+    if (!userId.trim()) {
 
-  if (!user) {
+      setError("Please enter User ID");
 
-    setError("User Not Found");
+      setUserData(null);
 
-    setUserData(null);
+      return;
+    }
 
-    return;
+    try {
 
-  }
+      const searchId =
+        userId.trim();
 
-  setError("");
+      const user =
+        await getUserDetails(searchId);
 
-const directCount = await verifyDirectCount(userId.trim());
-const totalTeam = await verifyTotalTeam(userId.trim());
+      if (!user) {
 
-setActualDirect(directCount);
-setActualTotalTeam(totalTeam);
+        setError("User Not Found");
 
-setUserData(user);
+        setUserData(null);
 
-};
-const [userData, setUserData] = useState(null);
-const [actualDirect, setActualDirect] = useState(0);
-const [actualTotalTeam, setActualTotalTeam] = useState(0);
-const [error, setError] = useState("");
+        return;
+      }
+
+      setError("");
+
+      const directCount =
+        await verifyDirectCount(searchId);
+
+      const totalTeam =
+        await verifyTotalTeam(searchId);
+
+      setActualDirect(directCount);
+
+      setActualTotalTeam(totalTeam);
+
+      setUserData(user);
+
+    } catch (error) {
+
+      console.error(
+        "Search User Error :",
+        error
+      );
+
+      setError(
+        "Unable to load user data"
+      );
+
+    }
+
+  };
+
   return (
 
-  <div className="search-user-card">
+    <>
 
-    <h3>Search User</h3>
+      {/* ==========================
+          SEARCH USER
+      ========================== */}
 
-    <div className="search-box">
+      <h3>
+        Search User
+      </h3>
 
-      <input
-        type="text"
-        placeholder="Enter User ID"
-        value={userId}
-        onChange={(e) => setUserId(e.target.value)}
+      <div className="search-box">
+
+        <input
+          type="text"
+          placeholder="Enter User ID"
+          value={userId}
+          onChange={(e) =>
+            setUserId(e.target.value)
+          }
+          onKeyDown={(e) => {
+
+            if (e.key === "Enter") {
+              handleSearch();
+            }
+
+          }}
+        />
+
+        <button
+          onClick={handleSearch}
+        >
+          Search
+        </button>
+
+      </div>
+
+
+      {/* ==========================
+          SEARCH ERROR
+      ========================== */}
+
+      {error && (
+        <p className="search-error">
+          {error}
+        </p>
+      )}
+
+
+      {/* ==========================
+          USER DEBUG CARD
+      ========================== */}
+
+      <UserDebugCard
+        userData={userData}
       />
 
-      <button onClick={handleSearch}>
-        Search
-      </button>
 
-    </div>
+      {/* ==========================
+          TEAM VERIFICATION
+      ========================== */}
 
-    {error && (
-      <p className="search-error">
-        {error}
-      </p>
-    )}
+      <VerifyPanel
 
-    <UserDebugCard userData={userData} />
-<VerifyPanel
-    savedDirect={userData?.team?.directCount || 0}
-    actualDirect={actualDirect}
-    savedTotalTeam={userData?.team?.totalTeam || 0}
-    actualTotalTeam={actualTotalTeam}
-/>
-  </div>
+        savedDirect={
+          userData?.team?.directCount || 0
+        }
 
-);
+        actualDirect={
+          actualDirect
+        }
 
+        savedTotalTeam={
+          userData?.team?.totalTeam || 0
+        }
+
+        actualTotalTeam={
+          actualTotalTeam
+        }
+
+      />
+
+    </>
+
+  );
 }
 
 export default SearchUser;

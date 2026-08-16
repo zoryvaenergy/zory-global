@@ -194,7 +194,7 @@ export const POOL_PLANS = {
     poolEntry: 1000,
     baseIncome: 500,
 
-    requiredDirect: 101,
+    requiredDirect: 151,
     unlockType: "DIRECT",
     completedStep: 4,
     autoUpgrade: true,

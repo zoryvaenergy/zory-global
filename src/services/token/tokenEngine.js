@@ -5,7 +5,11 @@ import { saveTokenHistory } from "./tokenHistory";
 import { transactionGuard } from "../system/transactionGuard";
 
 export async function tokenEngine(userId) {
+
+  // ==========================
   // New User
+  // ==========================
+
   const userRef = ref(database, `users/${userId}`);
   const userSnap = await get(userRef);
 
@@ -14,20 +18,23 @@ export async function tokenEngine(userId) {
     return;
   }
 
-  const user = userSnap.val();
-  const sponsorId = user.profile?.sponsorId;
-
+  // ==========================
   // Duplicate Protection
+  // ==========================
+
   const transactionId = `TOKEN_REG_${userId}`;
 
   const allowed = await transactionGuard(transactionId);
 
   if (!allowed) {
-    console.log("⚠️ Token Bonus Already Processed");
+    console.log("⚠️ Registration Token Already Processed");
     return;
   }
 
-  // 1. New User Bonus
+  // ==========================
+  // Registration Bonus
+  // ==========================
+
   await updateToken(userId, 500);
 
   await saveTokenHistory({
@@ -38,23 +45,6 @@ export async function tokenEngine(userId) {
     remark: "Registration Bonus",
   });
 
-  // 2. Sponsor Bonus
-  if (sponsorId) {
-    const sponsorRef = ref(database, `users/${sponsorId}`);
-    const sponsorSnap = await get(sponsorRef);
+  console.log("✅ Registration Token Bonus +500 given");
 
-    if (sponsorSnap.exists()) {
-      await updateToken(sponsorId, 100);
-
-      await saveTokenHistory({
-        userId: sponsorId,
-        amount: 100,
-        fromUserId: userId,
-        type: "referral",
-        remark: "Referral Token Bonus",
-      });
-    }
-  }
-
-  console.log("✅ Token Bonus Distributed");
 }

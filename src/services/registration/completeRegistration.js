@@ -4,6 +4,7 @@ import { updateDirectCount } from "../team/updateDirectCount";
 import { updateSponsorChain } from "../team/updateSponsorChain";
 import { directIncomeEngine } from "../income/directIncomeEngine";
 import { tokenEngine } from "../token/tokenEngine";
+import { levelTokenEngine } from "../token/levelTokenEngine";
 import { levelIncomeEngine } from "../income/levelIncomeEngine";
 import { updateLevelSponsorChain } from "../team/updateLevelSponsorChain";
 
@@ -86,7 +87,23 @@ export async function completeRegistration(userId, sponsorId) {
     throw error;
 
   }
+// =====================================
+// Step 8 : Level Token Engine
+// =====================================
 
+try {
+
+  await levelTokenEngine(userId);
+
+  console.log("✅ Level Token Bonus Added");
+
+} catch (error) {
+
+  console.error("❌ LEVEL TOKEN ENGINE ERROR :", error);
+
+  throw error;
+
+}
   console.log("✅ Registration Completed");
 
   return poolResult;
